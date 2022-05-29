@@ -1,0 +1,15 @@
+# Binaries
+Bin/
+Bin-Int/
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+
+# Program Debug Database Files
+**.pdb
+
+# Directories

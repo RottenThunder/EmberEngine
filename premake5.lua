@@ -1,0 +1,122 @@
+workspace "EmberEngine"
+	architecture "x86_64"
+	startproject "Sandbox"
+
+	configurations
+	{
+		"Debug",
+		"Release",
+		"Distribution"
+	}
+
+project "EmberEngine"
+	location "EmberEngine"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++20"
+	staticruntime "On"
+
+	targetdir ("Bin/%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}/%{prj.name}")
+	objdir ("Bin-Int/%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"%{prj.name}/src"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines
+		{
+			"EMBER_PLATFORM_WINDOWS"
+		}
+
+	filter "system:linux"
+		pic "On"
+		systemversion "latest"
+
+		defines
+		{
+			"EMBER_PLATFORM_LINUX"
+		}
+
+	filter "configurations:Debug"
+		defines "EMBER_CONFIG_DEBUG"
+		runtime "Debug"
+		symbols "On"
+
+	filter "configurations:Release"
+		defines "EMBER_CONFIG_RELEASE"
+		runtime "Release"
+		optimize "On"
+
+	filter "configurations:Distribution"
+		defines "EMBER_CONFIG_DISTRIBUTION"
+		runtime "Release"
+		optimize "On"
+
+project "Sandbox"
+	location "Sandbox"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++20"
+	staticruntime "On"
+
+	targetdir ("Bin/%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}/%{prj.name}")
+	objdir ("Bin-Int/%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"%{prj.name}/src",
+		"EmberEngine/src"
+	}
+
+	links
+	{
+		"EmberEngine"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines
+		{
+			"EMBER_PLATFORM_WINDOWS"
+		}
+
+	filter "system:linux"
+		pic "On"
+		systemversion "latest"
+
+		defines
+		{
+			"EMBER_PLATFORM_LINUX"
+		}
+
+	filter "configurations:Debug"
+		defines "EMBER_CONFIG_DEBUG"
+		runtime "Debug"
+		symbols "On"
+
+	filter "configurations:Release"
+		defines "EMBER_CONFIG_RELEASE"
+		runtime "Release"
+		optimize "On"
+
+	filter "configurations:Distribution"
+		defines "EMBER_CONFIG_DISTRIBUTION"
+		runtime "Release"
+		optimize "On"

@@ -1,3 +1,4 @@
+#include "EmberEnginePCH.h"
 #include "Application.h"
 
 namespace EmberEngine

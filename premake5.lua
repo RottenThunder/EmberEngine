@@ -19,6 +19,9 @@ project "EmberEngine"
 	targetdir ("Bin/%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}/%{prj.name}")
 	objdir ("Bin-Int/%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}/%{prj.name}")
 
+	pchheader "EmberEnginePCH.h"
+	pchsource "EmberEngine/src/EmberEnginePCH.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

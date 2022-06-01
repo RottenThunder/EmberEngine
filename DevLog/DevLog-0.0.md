@@ -12,3 +12,12 @@
 - Ember's precompiled header
     - Ember has been set up with a precompiled header
     - This is for decreasing compile time when the project becomes large enough to include an STL file more than once in one file
+
+## Version 0.0.2 (01/06/2022)
+- Ember's event system
+    - Ember now has it's own event system, where it can create events for when any sort of input happens
+    - The events were split up into 3 categories (each with their own header file):
+        - Application
+        - Key
+        - Mouse
+    - Application events are dedicated to just window events but it can be expanded in the future

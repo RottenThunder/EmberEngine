@@ -2,7 +2,7 @@
 
 #define EMBER_VERSION_MAJOR 0
 #define EMBER_VERSION_MINOR 0
-#define EMBER_VERSION_PATCH 1
+#define EMBER_VERSION_PATCH 2
 
 #if defined EMBER_CONFIG_DEBUG
 #define EMBER_ASSERTS_ENABLED
@@ -17,3 +17,5 @@
 #define EMBER_ASSERT(x, message) 
 #define EMBER_REVERSE_ASSERT(x, message) 
 #endif
+
+#define BIT_FIELD(x) (1 << x)

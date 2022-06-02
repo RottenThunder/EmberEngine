@@ -21,3 +21,11 @@
         - Key
         - Mouse
     - Application events are dedicated to just window events but it can be expanded in the future
+
+## Version 0.0.3 (02/06/2022)
+- Ember now uses GLFW to create a window
+    - Ember now has it's own Window class which contains basic information about the window
+        - It is also responsible for the creation of the window
+    - The window has not been hooked up to the Ember Event System, so it can not close (this will be the next step in development)
+    - The engine uses the glfw3_mt.lib file to statically link to the engine
+    - The glfw binaries can be found [here](https://www.glfw.org/download.html)

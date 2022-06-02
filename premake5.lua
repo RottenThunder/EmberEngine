@@ -30,7 +30,14 @@ project "EmberEngine"
 
 	includedirs
 	{
-		"%{prj.name}/src"
+		"%{prj.name}/src",
+		"Dependencies/GLFW/include"
+	}
+
+	links
+	{
+		"Dependencies/GLFW/lib/glfw3_mt.lib",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -84,7 +91,8 @@ project "Sandbox"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"EmberEngine/src"
+		"EmberEngine/src",
+		"Dependencies/GLFW/include"
 	}
 
 	links

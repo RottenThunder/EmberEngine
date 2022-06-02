@@ -16,7 +16,7 @@ namespace EmberEngine
 		inline uint16_t GetY() const { return PosY; }
 
 		virtual EventType GetEventType() const override { return EventType::WindowMoved; }
-		virtual uint8_t GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Application); }
 		virtual std::string GetName() const override
 		{
 			std::stringstream ss;
@@ -39,7 +39,7 @@ namespace EmberEngine
 		inline uint16_t GetHeight() const { return Height; }
 
 		virtual EventType GetEventType() const override { return EventType::WindowResize; }
-		virtual uint8_t GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Application); }
 		virtual std::string GetName() const override
 		{
 			std::stringstream ss;
@@ -56,7 +56,7 @@ namespace EmberEngine
 		WindowCloseEvent() {}
 
 		virtual EventType GetEventType() const override { return EventType::WindowClose; }
-		virtual uint8_t GetCategoryFlags() const override { return EventCategory::Application; }
+		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Application); }
 		virtual std::string GetName() const override
 		{
 			std::stringstream ss;

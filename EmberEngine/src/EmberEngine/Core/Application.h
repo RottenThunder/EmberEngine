@@ -1,10 +1,14 @@
 #pragma once
 #include "Base.h"
+#include "Window.h"
 
 namespace EmberEngine
 {
 	class Application
 	{
+	private:
+		bool Running = true;
+		std::unique_ptr<Window> MainWindow;
 	public:
 		Application();
 		virtual ~Application();

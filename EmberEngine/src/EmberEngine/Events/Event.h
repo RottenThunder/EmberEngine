@@ -12,7 +12,7 @@ namespace EmberEngine
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
-	enum EventCategory : uint8_t
+	enum class EventCategory : uint8_t
 	{
 		None = 0,
 		Application = BIT_FIELD(0),
@@ -35,7 +35,7 @@ namespace EmberEngine
 
 		inline bool IsInCategory(EventCategory category)
 		{
-			return GetCategoryFlags() & category;
+			return GetCategoryFlags() & static_cast<uint8_t>(category);
 		}
 	};
 

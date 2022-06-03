@@ -16,7 +16,7 @@ namespace EmberEngine
 		inline float GetY() const { return MouseY; }
 
 		virtual EventType GetEventType() const override { return EventType::MouseMoved; }
-		virtual uint8_t GetCategoryFlags() const override { return EventCategory::Mouse | EventCategory::Input; }
+		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Mouse) | static_cast<uint8_t>(EventCategory::Input); }
 		virtual std::string GetName() const override
 		{
 			std::stringstream ss;
@@ -39,7 +39,7 @@ namespace EmberEngine
 		inline float GetYOffset() const { return YOffset; }
 
 		virtual EventType GetEventType() const override { return EventType::MouseScrolled; }
-		virtual uint8_t GetCategoryFlags() const override { return EventCategory::Mouse | EventCategory::Input; }
+		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Mouse) | static_cast<uint8_t>(EventCategory::Input); }
 		virtual std::string GetName() const override
 		{
 			std::stringstream ss;
@@ -60,7 +60,7 @@ namespace EmberEngine
 	public:
 		inline uint8_t GetMouseButton() const { return Button; }
 
-		virtual uint8_t GetCategoryFlags() const override { return EventCategory::MouseButton | EventCategory::Input; }
+		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::MouseButton) | static_cast<uint8_t>(EventCategory::Input); }
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent

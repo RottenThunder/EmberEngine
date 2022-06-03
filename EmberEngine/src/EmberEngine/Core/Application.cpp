@@ -5,8 +5,9 @@
 namespace EmberEngine
 {
 	Application::Application()
+		: MainWindow(std::unique_ptr<Window>(Window::Create({ "Ember Engine", 1280ui16, 720ui16 })))
 	{
-		MainWindow = std::unique_ptr<Window>(Window::Create({ "Ember Engine", 1280ui16, 720ui16 }));
+		MainWindow->SetEventCallback(BIND_EVENT_FUNCTION(OnEvent));
 	}
 
 	Application::~Application()
@@ -17,9 +18,20 @@ namespace EmberEngine
 	{
 		while (Running)
 		{
-			glClearColor(1.0f, 0.25f, 0.125f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
 			MainWindow->OnUpdate();
 		}
+	}
+
+	void Application::OnEvent(Event& e)
+	{
+		EventDispatcher eventDispatcher(e);
+		eventDispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FUNCTION(OnWindowClose));
+	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		Running = false;
+		std::cout << e.GetName() << std::endl;
+		return true;
 	}
 }

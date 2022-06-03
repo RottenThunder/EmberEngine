@@ -2,7 +2,7 @@
 
 #define EMBER_VERSION_MAJOR 0
 #define EMBER_VERSION_MINOR 0
-#define EMBER_VERSION_PATCH 3
+#define EMBER_VERSION_PATCH 4
 
 #if defined EMBER_CONFIG_DEBUG
 #define EMBER_ASSERTS_ENABLED
@@ -18,4 +18,5 @@
 #define EMBER_REVERSE_ASSERT(x, message) 
 #endif
 
+#define BIND_EVENT_FUNCTION(x) std::bind(&Application::x, this, std::placeholders::_1)
 #define BIT_FIELD(x) (1 << x)

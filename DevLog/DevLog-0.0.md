@@ -29,3 +29,8 @@
     - The window has not been hooked up to the Ember Event System, so it can not close (this will be the next step in development)
     - The engine uses the glfw3_mt.lib file to statically link to the engine
     - The glfw binaries can be found [here](https://www.glfw.org/download.html)
+
+## Version 0.0.4 (03/06/2022)
+- The Window now uses the Ember Event System
+    - All GLFW Callbacks have now been set to create an Ember Event
+    - The Window also closes now because a WindowCloseEvent terminates the "Running" loop and procedes to destroy the window

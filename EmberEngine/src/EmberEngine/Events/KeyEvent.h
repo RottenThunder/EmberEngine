@@ -15,7 +15,7 @@ namespace EmberEngine
 	public:
 		inline uint16_t GetKeyCode() const { return KeyCode; }
 
-		virtual uint8_t GetCategoryFlags() const override { return EventCategory::Keyboard | EventCategory::Input; }
+		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Keyboard) | static_cast<uint8_t>(EventCategory::Input); }
 	};
 
 	class KeyPressedEvent : public KeyEvent

@@ -34,3 +34,12 @@
 - The Window now uses the Ember Event System
     - All GLFW Callbacks have now been set to create an Ember Event
     - The Window also closes now because a WindowCloseEvent terminates the "Running" loop and procedes to destroy the window
+
+## Version 0.0.5 (04/06/2022)
+- Ember Engine has a Layer System!
+    - Layers are "Rendering Surfaces" more or less
+    - Every Layer can render something different but you can only see 1 Layer at a time
+        - This can be good for Loading screens for example
+    - Some changes were done to the Window class
+        - The WindowMoved Events were not being created because the callback was not set up - this has been fixed
+        - There's a way of accessing the window's initial position and size through a EmberEngine::Application

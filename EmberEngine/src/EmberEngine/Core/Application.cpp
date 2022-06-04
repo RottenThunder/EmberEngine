@@ -1,6 +1,5 @@
 #include "EmberEnginePCH.h"
 #include "Application.h"
-#include <GLFW/glfw3.h> //for the clear colour
 
 namespace EmberEngine
 {
@@ -18,20 +17,59 @@ namespace EmberEngine
 	{
 		while (Running)
 		{
+			for (Layer* layer : layerStack)
+				layer->OnUpdate();
+
 			MainWindow->OnUpdate();
 		}
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		layerStack.PushLayer(layer);
+	}
+
+	void Application::PopLayer(Layer* layer)
+	{
+		layerStack.PopLayer(layer);
 	}
 
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher eventDispatcher(e);
 		eventDispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FUNCTION(OnWindowClose));
+
+		for (auto it = layerStack.end(); it != layerStack.begin();)
+		{
+			(*--it)->OnEvent(e);
+			if (e.handled)
+				break;
+		}
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)
 	{
 		Running = false;
-		std::cout << e.GetName() << std::endl;
 		return true;
+	}
+
+	uint16_t Application::GetWindowPosX()
+	{
+		return MainWindow->GetPosX();
+	}
+
+	uint16_t Application::GetWindowPosY()
+	{
+		return MainWindow->GetPosY();
+	}
+
+	uint16_t Application::GetWindowWidth()
+	{
+		return MainWindow->GetWidth();
+	}
+
+	uint16_t Application::GetWindowHeight()
+	{
+		return MainWindow->GetHeight();
 	}
 }

@@ -26,9 +26,8 @@ namespace EmberEngine
 	{
 	private:
 		friend class EventDispatcher;
-	protected:
-		bool handled = false;
 	public:
+		bool handled = false;
 		virtual EventType GetEventType() const = 0;
 		virtual uint8_t GetCategoryFlags() const = 0;
 		virtual std::string GetName() const = 0;

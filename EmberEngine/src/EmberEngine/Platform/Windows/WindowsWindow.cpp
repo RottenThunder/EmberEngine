@@ -38,20 +38,33 @@ namespace EmberEngine
 		if (!glfwInitialised)
 		{
 			int32_t init = glfwInit();
-			EMBER_ASSERT(init, "Could not initialise glfw!!!");
+			EMBER_ASSERT(init, "[EMBER] Could not initialise glfw!!!");
 
 			glfwSetErrorCallback(GLFWerrorCallback);
 			glfwInitialised = true;
 		}
 
 		WindowObject = glfwCreateWindow(windowData.Width, windowData.Height, windowData.Title.c_str(), NULL, NULL);
-		EMBER_ASSERT(WindowObject, "Window Object == NULL!!!");
+		EMBER_ASSERT(WindowObject, "[EMBER] Window Object == NULL!!!");
 
 		glfwMakeContextCurrent(WindowObject);
 		glfwSetWindowUserPointer(WindowObject, &windowData);
 		SetVSync(true);
+		int xPos, yPos;
+		glfwGetWindowPos(WindowObject, &xPos, &yPos);
+		windowData.XPosition = static_cast<uint16_t>(xPos);
+		windowData.YPosition = static_cast<uint16_t>(yPos);
 
 		//Setting GLFW Event Callbacks
+		glfwSetWindowPosCallback(WindowObject, [](GLFWwindow* window, int32_t xPosition, int32_t yPosition)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				data.XPosition = static_cast<uint16_t>(xPosition);
+				data.YPosition = static_cast<uint16_t>(yPosition);
+				WindowMovedEvent e(data.XPosition, data.YPosition);
+				data.EventCallback(e);
+			});
+
 		glfwSetWindowSizeCallback(WindowObject, [](GLFWwindow* window, int32_t width, int32_t height)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);

@@ -12,6 +12,8 @@ namespace EmberEngine
 			std::string Title;
 			uint16_t Width;
 			uint16_t Height;
+			uint16_t XPosition;
+			uint16_t YPosition;
 			std::function<void(Event&)> EventCallback;
 			bool VSync;
 		};
@@ -27,6 +29,8 @@ namespace EmberEngine
 
 		virtual inline uint16_t GetWidth() const override { return windowData.Width; }
 		virtual inline uint16_t GetHeight() const override { return windowData.Height; }
+		virtual inline uint16_t GetPosX() const override { return windowData.XPosition; }
+		virtual inline uint16_t GetPosY() const override { return windowData.YPosition; }
 
 		virtual inline void SetEventCallback(const std::function<void(Event&)>& callback) override { windowData.EventCallback = callback; }
 		virtual void SetVSync(bool vSync) override;

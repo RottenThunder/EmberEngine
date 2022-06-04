@@ -5,4 +5,5 @@
 //---CORE------------------------------------------------------------------
 #include "EmberEngine/Core/Application.h"
 #include "EmberEngine/Core/EntryPoint.h"
+#include "EmberEngine/Core/Layer.h"
 //-------------------------------------------------------------------------

@@ -31,6 +31,7 @@ namespace EmberEngine
 		virtual inline uint16_t GetHeight() const override { return windowData.Height; }
 		virtual inline uint16_t GetPosX() const override { return windowData.XPosition; }
 		virtual inline uint16_t GetPosY() const override { return windowData.YPosition; }
+		virtual inline void* GetNativeWindow() const override { return WindowObject; }
 
 		virtual inline void SetEventCallback(const std::function<void(Event&)>& callback) override { windowData.EventCallback = callback; }
 		virtual void SetVSync(bool vSync) override;

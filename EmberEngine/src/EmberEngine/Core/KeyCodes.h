@@ -1,0 +1,125 @@
+#pragma once
+
+//Printable Keys
+#define EMBER_KEY_SPACE              32ui16
+#define EMBER_KEY_APOSTROPHE         39ui16
+#define EMBER_KEY_COMMA              44ui16
+#define EMBER_KEY_MINUS              45ui16
+#define EMBER_KEY_FULL_STOP          46ui16
+#define EMBER_KEY_SLASH              47ui16
+#define EMBER_KEY_0                  48ui16
+#define EMBER_KEY_1                  49ui16
+#define EMBER_KEY_2                  50ui16
+#define EMBER_KEY_3                  51ui16
+#define EMBER_KEY_4                  52ui16
+#define EMBER_KEY_5                  53ui16
+#define EMBER_KEY_6                  54ui16
+#define EMBER_KEY_7                  55ui16
+#define EMBER_KEY_8                  56ui16
+#define EMBER_KEY_9                  57ui16
+#define EMBER_KEY_SEMICOLON          59ui16
+#define EMBER_KEY_EQUALS             61ui16
+#define EMBER_KEY_A                  65ui16
+#define EMBER_KEY_B                  66ui16
+#define EMBER_KEY_C                  67ui16
+#define EMBER_KEY_D                  68ui16
+#define EMBER_KEY_E                  69ui16
+#define EMBER_KEY_F                  70ui16
+#define EMBER_KEY_G                  71ui16
+#define EMBER_KEY_H                  72ui16
+#define EMBER_KEY_I                  73ui16
+#define EMBER_KEY_J                  74ui16
+#define EMBER_KEY_K                  75ui16
+#define EMBER_KEY_L                  76ui16
+#define EMBER_KEY_M                  77ui16
+#define EMBER_KEY_N                  78ui16
+#define EMBER_KEY_O                  79ui16
+#define EMBER_KEY_P                  80ui16
+#define EMBER_KEY_Q                  81ui16
+#define EMBER_KEY_R                  82ui16
+#define EMBER_KEY_S                  83ui16
+#define EMBER_KEY_T                  84ui16
+#define EMBER_KEY_U                  85ui16
+#define EMBER_KEY_V                  86ui16
+#define EMBER_KEY_W                  87ui16
+#define EMBER_KEY_X                  88ui16
+#define EMBER_KEY_Y                  89ui16
+#define EMBER_KEY_Z                  90ui16
+#define EMBER_KEY_LEFT_BRACKET       91ui16  /* [ */
+#define EMBER_KEY_BACKSLASH          92ui16  /* \ */
+#define EMBER_KEY_RIGHT_BRACKET      93ui16  /* ] */
+#define EMBER_KEY_GRAVE_ACCENT       96ui16  /* ` */
+#define EMBER_KEY_WORLD_1            161ui16 /* non-US #1 */
+#define EMBER_KEY_WORLD_2            162ui16 /* non-US #2 */
+
+//Function keys
+#define EMBER_KEY_ESCAPE             256ui16
+#define EMBER_KEY_ENTER              257ui16
+#define EMBER_KEY_TAB                258ui16
+#define EMBER_KEY_BACKSPACE          259ui16
+#define EMBER_KEY_INSERT             260ui16
+#define EMBER_KEY_DELETE             261ui16
+#define EMBER_KEY_RIGHT              262ui16
+#define EMBER_KEY_LEFT               263ui16
+#define EMBER_KEY_DOWN               264ui16
+#define EMBER_KEY_UP                 265ui16
+#define EMBER_KEY_PAGE_UP            266ui16
+#define EMBER_KEY_PAGE_DOWN          267ui16
+#define EMBER_KEY_HOME               268ui16
+#define EMBER_KEY_END                269ui16
+#define EMBER_KEY_CAPS_LOCK          280ui16
+#define EMBER_KEY_SCROLL_LOCK        281ui16
+#define EMBER_KEY_NUM_LOCK           282ui16
+#define EMBER_KEY_PRINT_SCREEN       283ui16
+#define EMBER_KEY_PAUSE              284ui16
+#define EMBER_KEY_F1                 290ui16
+#define EMBER_KEY_F2                 291ui16
+#define EMBER_KEY_F3                 292ui16
+#define EMBER_KEY_F4                 293ui16
+#define EMBER_KEY_F5                 294ui16
+#define EMBER_KEY_F6                 295ui16
+#define EMBER_KEY_F7                 296ui16
+#define EMBER_KEY_F8                 297ui16
+#define EMBER_KEY_F9                 298ui16
+#define EMBER_KEY_F10                299ui16
+#define EMBER_KEY_F11                300ui16
+#define EMBER_KEY_F12                301ui16
+#define EMBER_KEY_F13                302ui16
+#define EMBER_KEY_F14                303ui16
+#define EMBER_KEY_F15                304ui16
+#define EMBER_KEY_F16                305ui16
+#define EMBER_KEY_F17                306ui16
+#define EMBER_KEY_F18                307ui16
+#define EMBER_KEY_F19                308ui16
+#define EMBER_KEY_F20                309ui16
+#define EMBER_KEY_F21                310ui16
+#define EMBER_KEY_F22                311ui16
+#define EMBER_KEY_F23                312ui16
+#define EMBER_KEY_F24                313ui16
+#define EMBER_KEY_F25                314ui16
+#define EMBER_KEY_KP_0               320ui16
+#define EMBER_KEY_KP_1               321ui16
+#define EMBER_KEY_KP_2               322ui16
+#define EMBER_KEY_KP_3               323ui16
+#define EMBER_KEY_KP_4               324ui16
+#define EMBER_KEY_KP_5               325ui16
+#define EMBER_KEY_KP_6               326ui16
+#define EMBER_KEY_KP_7               327ui16
+#define EMBER_KEY_KP_8               328ui16
+#define EMBER_KEY_KP_9               329ui16
+#define EMBER_KEY_KP_DECIMAL         330ui16
+#define EMBER_KEY_KP_DIVIDE          331ui16
+#define EMBER_KEY_KP_MULTIPLY        332ui16
+#define EMBER_KEY_KP_SUBTRACT        333ui16
+#define EMBER_KEY_KP_ADD             334ui16
+#define EMBER_KEY_KP_ENTER           335ui16
+#define EMBER_KEY_KP_EQUAL           336ui16
+#define EMBER_KEY_LEFT_SHIFT         340ui16
+#define EMBER_KEY_LEFT_CONTROL       341ui16
+#define EMBER_KEY_LEFT_ALT           342ui16
+#define EMBER_KEY_LEFT_SUPER         343ui16
+#define EMBER_KEY_RIGHT_SHIFT        344ui16
+#define EMBER_KEY_RIGHT_CONTROL      345ui16
+#define EMBER_KEY_RIGHT_ALT          346ui16
+#define EMBER_KEY_RIGHT_SUPER        347ui16
+#define EMBER_KEY_MENU               348ui16

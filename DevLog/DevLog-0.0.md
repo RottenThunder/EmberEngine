@@ -43,3 +43,10 @@
     - Some changes were done to the Window class
         - The WindowMoved Events were not being created because the callback was not set up - this has been fixed
         - There's a way of accessing the window's initial position and size through a EmberEngine::Application
+
+## Version 0.0.6 (05/06/2022)
+- Ember now has an Input System
+    - The user can now query the engine to see the state of any key
+    - This also can happen to mouse buttons
+    - Ember also has it's own key codes and mouse button codes
+        - They are currently the same as the GLFW ones, with some minor differences with naming

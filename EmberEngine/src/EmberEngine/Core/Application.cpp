@@ -3,9 +3,14 @@
 
 namespace EmberEngine
 {
+	Application* Application::Instance = nullptr;
+
 	Application::Application()
 		: MainWindow(std::unique_ptr<Window>(Window::Create({ "Ember Engine", 1280ui16, 720ui16 })))
 	{
+		EMBER_REVERSE_ASSERT(Instance, "Application already exists");
+		Instance = this;
+
 		MainWindow->SetEventCallback(BIND_EVENT_FUNCTION(OnEvent));
 	}
 
@@ -55,21 +60,21 @@ namespace EmberEngine
 
 	uint16_t Application::GetWindowPosX()
 	{
-		return MainWindow->GetPosX();
+		return Instance->GetWindow().GetPosX();
 	}
 
 	uint16_t Application::GetWindowPosY()
 	{
-		return MainWindow->GetPosY();
+		return Instance->GetWindow().GetPosY();
 	}
 
 	uint16_t Application::GetWindowWidth()
 	{
-		return MainWindow->GetWidth();
+		return Instance->GetWindow().GetWidth();
 	}
 
 	uint16_t Application::GetWindowHeight()
 	{
-		return MainWindow->GetHeight();
+		return Instance->GetWindow().GetHeight();
 	}
 }

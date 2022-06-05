@@ -8,12 +8,19 @@ public:
 
 	void OnUpdate() override
 	{
-		//std::cout << "ExampleLayer is Updating" << std::endl;
+		if (EmberEngine::Input::IsKeyPressed(EMBER_KEY_A))
+		{
+			std::cout << "A Key Was Pressed!" << std::endl;
+		}
 	}
 
 	void OnEvent(EmberEngine::Event& e) override
 	{
-		std::cout << e.GetName() << std::endl;
+		if (e.GetEventType() == EmberEngine::EventType::KeyPressed)
+		{
+			EmberEngine::KeyPressedEvent& keyEvent = (EmberEngine::KeyPressedEvent&)e;
+			std::cout << char(keyEvent.GetKeyCode()) << std::endl;
+		}
 	}
 };
 

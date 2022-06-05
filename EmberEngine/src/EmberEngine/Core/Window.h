@@ -24,6 +24,7 @@ namespace EmberEngine
 		virtual uint16_t GetHeight() const = 0;
 		virtual uint16_t GetPosX() const = 0;
 		virtual uint16_t GetPosY() const = 0;
+		virtual void* GetNativeWindow() const = 0;
 
 		virtual void SetEventCallback(const std::function<void(Event&)>& callback) = 0;
 		virtual void SetVSync(bool vSync) = 0;

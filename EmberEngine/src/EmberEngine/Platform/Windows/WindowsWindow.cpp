@@ -37,8 +37,8 @@ namespace EmberEngine
 
 		if (!glfwInitialised)
 		{
-			int32_t init = glfwInit();
-			EMBER_ASSERT(init, "[EMBER] Could not initialise glfw!!!");
+			int32_t glfwInitStatus = glfwInit();
+			EMBER_ASSERT(glfwInitStatus, "[EMBER] Failed to initialise glfw!!!");
 
 			glfwSetErrorCallback(GLFWerrorCallback);
 			glfwInitialised = true;
@@ -48,6 +48,8 @@ namespace EmberEngine
 		EMBER_ASSERT(WindowObject, "[EMBER] Window Object == NULL!!!");
 
 		glfwMakeContextCurrent(WindowObject);
+		int32_t gladInitStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		EMBER_ASSERT(gladInitStatus, "[EMBER] Failed to initialise glad!!!");
 		glfwSetWindowUserPointer(WindowObject, &windowData);
 		SetVSync(true);
 		int xPos, yPos;

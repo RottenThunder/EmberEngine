@@ -50,3 +50,13 @@
     - This also can happen to mouse buttons
     - Ember also has it's own key codes and mouse button codes
         - They are currently the same as the GLFW ones, with some minor differences with naming
+
+## Version 0.0.7 (06/06/2022)
+- Ember now uses Glad for OpenGL Initialisation
+    - Glad is used for managing function pointers for OpenGL
+    - It is useful because OpenGL is only really a standard/specification, it is up to the driver manufacturer to implement the specification to a driver that the specific graphics card supports
+        - It can optimise OpenGL for different OpenGL Versions etc.
+    - Glad can be configured [here](https://glad.dav1d.de/)
+    - A few changes had to be made for intergration with the engine:
+        - The previously named "glad.c" file had to changed to "glad.cpp"
+        - Inside the "glad.c" file, Ember's precompiled header had to included in the file

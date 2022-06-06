@@ -25,13 +25,16 @@ project "EmberEngine"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/Glad/**.h",
+		"%{prj.name}/vendor/Glad/**.cpp",
 	}
 
 	includedirs
 	{
 		"%{prj.name}/src",
-		"Dependencies/GLFW/include"
+		"Dependencies/GLFW/include",
+		"%{prj.name}/vendor/Glad/include"
 	}
 
 	links

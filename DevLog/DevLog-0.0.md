@@ -60,3 +60,10 @@
     - A few changes had to be made for intergration with the engine:
         - The previously named "glad.c" file had to changed to "glad.cpp"
         - Inside the "glad.c" file, Ember's precompiled header had to included in the file
+
+## Version 0.0.8 (07/06/2022)
+- Ember now uses a "Graphics Context" system
+    - This is to make the engine more versatile and not make the engine rely on OpenGL
+    - OpenGL will be the main renderering context and API for most of this project, but if i want to add DirectX in the future then i do not have to do as much refractoring
+    - The Context will control how to do certain functions based on what API is best for the given platform
+    - Only the OpenGLContext has been implemented

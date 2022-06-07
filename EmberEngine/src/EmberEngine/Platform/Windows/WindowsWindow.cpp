@@ -3,6 +3,7 @@
 #include "EmberEngine/Events/ApplicationEvent.h"
 #include "EmberEngine/Events/KeyEvent.h"
 #include "EmberEngine/Events/MouseEvent.h"
+#include "EmberEngine/Platform/OpenGL/OpenGLContext.h"
 
 namespace EmberEngine
 {
@@ -47,9 +48,9 @@ namespace EmberEngine
 		WindowObject = glfwCreateWindow(windowData.Width, windowData.Height, windowData.Title.c_str(), NULL, NULL);
 		EMBER_ASSERT(WindowObject, "[EMBER] Window Object == NULL!!!");
 
-		glfwMakeContextCurrent(WindowObject);
-		int32_t gladInitStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		EMBER_ASSERT(gladInitStatus, "[EMBER] Failed to initialise glad!!!");
+		Context = new OpenGLContext(WindowObject);
+		Context->Init();
+
 		glfwSetWindowUserPointer(WindowObject, &windowData);
 		SetVSync(true);
 		int xPos, yPos;
@@ -169,9 +170,7 @@ namespace EmberEngine
 
 	void WindowsWindow::OnUpdate()
 	{
-		glClearColor(1.0f, 0.25f, 0.125f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(WindowObject);
 		glfwPollEvents();
+		Context->SwapBuffers();
 	}
 }

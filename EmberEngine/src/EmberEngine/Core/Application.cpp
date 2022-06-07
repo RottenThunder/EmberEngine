@@ -1,5 +1,6 @@
 #include "EmberEnginePCH.h"
 #include "Application.h"
+#include <glad/glad.h> //For the Clear Colour
 
 namespace EmberEngine
 {
@@ -26,6 +27,8 @@ namespace EmberEngine
 				layer->OnUpdate();
 
 			MainWindow->OnUpdate();
+			glClearColor(1.0f, 0.25f, 0.125f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
 		}
 	}
 

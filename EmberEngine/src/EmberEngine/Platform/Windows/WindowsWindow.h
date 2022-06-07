@@ -1,6 +1,6 @@
 #pragma once
 #include "EmberEngine/Core/Window.h"
-#include <glad/glad.h>
+#include "EmberEngine/Renderer/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 
 namespace EmberEngine
@@ -19,6 +19,7 @@ namespace EmberEngine
 			bool VSync;
 		};
 
+		GraphicsContext* Context;
 		GLFWwindow* WindowObject;
 		WindowData windowData;
 

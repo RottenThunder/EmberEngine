@@ -67,3 +67,13 @@
     - OpenGL will be the main renderering context and API for most of this project, but if i want to add DirectX in the future then i do not have to do as much refractoring
     - The Context will control how to do certain functions based on what API is best for the given platform
     - Only the OpenGLContext has been implemented
+
+## Version 0.0.9 (08/06/2022)
+- Ember has now been tasked to draw a (white) triangle
+    - This was to test whether everything has been set up properly
+    - On some computers, you might not be able to see a triangle, simply because i did not write a shader (which is why it's white)
+    - This was also done to see exactly what i need to abstract:
+        - Vertex Buffers
+        - Index Buffers
+        - Vertex Arrays
+        - Shaders

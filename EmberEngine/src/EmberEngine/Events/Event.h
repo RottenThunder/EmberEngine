@@ -15,11 +15,11 @@ namespace EmberEngine
 	enum class EventCategory : uint8_t
 	{
 		None = 0,
-		Application = BIT_FIELD(0),
-		Input = BIT_FIELD(1),
-		Keyboard = BIT_FIELD(2),
-		Mouse = BIT_FIELD(3),
-		MouseButton = BIT_FIELD(4)
+		Application = EMBER_BIT_FIELD(0),
+		Input = EMBER_BIT_FIELD(1),
+		Keyboard = EMBER_BIT_FIELD(2),
+		Mouse = EMBER_BIT_FIELD(3),
+		MouseButton = EMBER_BIT_FIELD(4)
 	};
 
 	class Event

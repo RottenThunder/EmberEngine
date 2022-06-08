@@ -15,6 +15,8 @@ namespace EmberEngine
 		std::unique_ptr<Window> MainWindow;
 		LayerStack layerStack;
 
+		uint32_t VertexArray, VertexBuffer, IndexBuffer;
+
 		bool OnWindowClose(WindowCloseEvent& e);
 	public:
 		Application();

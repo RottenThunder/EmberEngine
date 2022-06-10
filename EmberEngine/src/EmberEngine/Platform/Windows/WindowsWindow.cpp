@@ -39,14 +39,14 @@ namespace EmberEngine
 		if (!glfwInitialised)
 		{
 			int32_t glfwInitStatus = glfwInit();
-			EMBER_ASSERT(glfwInitStatus, "[EMBER] Failed to initialise glfw!!!");
+			EMBER_ASSERT(glfwInitStatus, "Failed to initialise glfw!!!");
 
 			glfwSetErrorCallback(GLFWerrorCallback);
 			glfwInitialised = true;
 		}
 
 		WindowObject = glfwCreateWindow(windowData.Width, windowData.Height, windowData.Title.c_str(), NULL, NULL);
-		EMBER_ASSERT(WindowObject, "[EMBER] Window Object == NULL!!!");
+		EMBER_ASSERT(WindowObject, "Window Object == NULL!!!");
 
 		Context = new OpenGLContext(WindowObject);
 		Context->Init();

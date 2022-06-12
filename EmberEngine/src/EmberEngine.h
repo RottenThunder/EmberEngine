@@ -10,3 +10,9 @@
 #include "EmberEngine/Core/Layer.h"
 #include "EmberEngine/Core/MouseButtonCodes.h"
 //-------------------------------------------------------------------------
+
+//---MATHS-----------------------------------------------------------------
+#include "EmberEngine/Maths/Vectors/Vector2.h"
+#include "EmberEngine/Maths/Vectors/Vector3.h"
+#include "EmberEngine/Maths/Vectors/Vector4.h"
+//-------------------------------------------------------------------------

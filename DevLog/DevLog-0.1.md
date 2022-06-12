@@ -18,3 +18,18 @@
         - There is only "NULL" and "SSE" instructions as of now
             - "NULL" means that the functions do not use SIMD instructions
             - "SSE" means that it will use the SSE instruction set, when it can
+
+## Version 0.1.2 (12/06/2022)
+- Add, Subtract, Multiply and Divide Vectors
+    - The MathF Instance has been changed to initialise to nullptr
+        - This is to reduce unneccessary usage of memory
+    - MathF now has the ability to add, subtract, multiply and divide vectors together
+    - The vector classes has been given the functions to do these operations on itself
+    - There are vector operators that can compute statements like this:
+    ```
+    Vector4f vec1;
+    Vector4f vec2;
+    Vector4f vec3;
+    vec1 = vec2 + vec3;
+    ```
+    - There is now SSE2 instructions for all the MathF functions that have been added so far

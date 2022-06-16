@@ -33,3 +33,16 @@
     vec1 = vec2 + vec3;
     ```
     - There is now SSE2 instructions for all the MathF functions that have been added so far
+
+## Version 0.1.3 (16/06/2022)
+- Magnitudes of Vectors + bug fixes
+    - There are now magnitude functions for the vector classes
+        - These calculate the magnitude (length) of the vector
+        - For the integer vectors, the magnitude can be obtained as a float or as a double
+    - There are also square magnitude functions
+        - These calculate the squared magnitude of the vector
+        - These are much faster than the normal magnitude functions and are recommended to be used instead of them
+    - For the vectors that do not perfectly fit into 128 or 256 bit registers have been changed
+        - Private variables are used to fill up the space required for a SIMD register
+        - All vectors now have a singular constructor which sets all the components to 0 (including the private ones which are not used)
+    - There are now SSE3 instructions for all the MathF functions that have been added so far

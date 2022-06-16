@@ -22,6 +22,14 @@ namespace EmberEngine
 		virtual void Vector2DivImpl(float* dst, float* vec1, float* vec2) override;
 		virtual void Vector2DivImpl(double* dst, double* vec1, double* vec2) override;
 		virtual void Vector2DivImpl(int* dst, int* vec1, int* vec2) override;
+		virtual float Vector2Magnitude32Impl(float* vec) override;
+		virtual float Vector2SqMagnitude32Impl(float* vec) override;
+		virtual double Vector2Magnitude64Impl(double* vec) override;
+		virtual double Vector2SqMagnitude64Impl(double* vec) override;
+		virtual float Vector2Magnitude32Impl(int* vec) override;
+		virtual float Vector2SqMagnitude32Impl(int* vec) override;
+		virtual double Vector2Magnitude64Impl(int* vec) override;
+		virtual double Vector2SqMagnitude64Impl(int* vec) override;
 
 		//Vector3 Implementation
 		virtual void ResetVector3Impl(float* vec) override;
@@ -39,6 +47,14 @@ namespace EmberEngine
 		virtual void Vector3DivImpl(float* dst, float* vec1, float* vec2) override;
 		virtual void Vector3DivImpl(double* dst, double* vec1, double* vec2) override;
 		virtual void Vector3DivImpl(int* dst, int* vec1, int* vec2) override;
+		virtual float Vector3Magnitude32Impl(float* vec) override;
+		virtual float Vector3SqMagnitude32Impl(float* vec) override;
+		virtual double Vector3Magnitude64Impl(double* vec) override;
+		virtual double Vector3SqMagnitude64Impl(double* vec) override;
+		virtual float Vector3Magnitude32Impl(int* vec) override;
+		virtual float Vector3SqMagnitude32Impl(int* vec) override;
+		virtual double Vector3Magnitude64Impl(int* vec) override;
+		virtual double Vector3SqMagnitude64Impl(int* vec) override;
 
 		//Vector4 Implementation
 		virtual void ResetVector4Impl(float* vec) override;
@@ -56,5 +72,13 @@ namespace EmberEngine
 		virtual void Vector4DivImpl(float* dst, float* vec1, float* vec2) override;
 		virtual void Vector4DivImpl(double* dst, double* vec1, double* vec2) override;
 		virtual void Vector4DivImpl(int* dst, int* vec1, int* vec2) override;
+		virtual float Vector4Magnitude32Impl(float* vec) override;
+		virtual float Vector4SqMagnitude32Impl(float* vec) override;
+		virtual double Vector4Magnitude64Impl(double* vec) override;
+		virtual double Vector4SqMagnitude64Impl(double* vec) override;
+		virtual float Vector4Magnitude32Impl(int* vec) override;
+		virtual float Vector4SqMagnitude32Impl(int* vec) override;
+		virtual double Vector4Magnitude64Impl(int* vec) override;
+		virtual double Vector4SqMagnitude64Impl(int* vec) override;
 	};
 }

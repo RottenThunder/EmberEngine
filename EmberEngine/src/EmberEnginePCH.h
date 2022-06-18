@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <functional>
 #include <immintrin.h>
+#include <intrin.h>
 #include <iostream>
 #include <memory>
 #include <sstream>

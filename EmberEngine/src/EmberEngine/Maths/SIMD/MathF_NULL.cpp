@@ -3,8 +3,6 @@
 
 namespace EmberEngine
 {
-	MathF* MathF::Instance = nullptr;
-
 	void MathF_NULL::ResetVector2Impl(float* vec)
 	{
 		vec[0] = 0.0f;

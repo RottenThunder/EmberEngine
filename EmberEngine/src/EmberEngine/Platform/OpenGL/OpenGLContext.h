@@ -9,10 +9,13 @@ namespace EmberEngine
 	{
 	private:
 		GLFWwindow* WindowHandle;
+		std::string Version;
+		std::string GPU;
 	public:
 		OpenGLContext(GLFWwindow* windowHandle);
 
 		virtual void Init() override;
 		virtual void SwapBuffers() override;
+		virtual std::string GetGPU() override;
 	};
 }

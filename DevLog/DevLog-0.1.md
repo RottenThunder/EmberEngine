@@ -46,3 +46,9 @@
         - Private variables are used to fill up the space required for a SIMD register
         - All vectors now have a singular constructor which sets all the components to 0 (including the private ones which are not used)
     - There are now SSE3 instructions for all the MathF functions that have been added so far
+
+## Version 0.1.4 (18/06/2022)
+- Processor Analysing
+    - The Engine now analyses the host's processor to see which level of SIMD, the processor can support
+    - It can also extract the the name of the processor
+    - Other miscellaneous bug fixes were added

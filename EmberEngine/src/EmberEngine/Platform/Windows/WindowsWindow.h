@@ -1,6 +1,5 @@
 #pragma once
 #include "EmberEngine/Core/Window.h"
-#include "EmberEngine/Renderer/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 
 namespace EmberEngine
@@ -33,6 +32,7 @@ namespace EmberEngine
 		virtual inline uint16_t GetHeight() const override { return windowData.Height; }
 		virtual inline uint16_t GetPosX() const override { return windowData.XPosition; }
 		virtual inline uint16_t GetPosY() const override { return windowData.YPosition; }
+		virtual inline GraphicsContext* GetGraphicsContext() const override { return Context; }
 		virtual inline void* GetNativeWindow() const override { return WindowObject; }
 
 		virtual inline void SetEventCallback(const std::function<void(Event&)>& callback) override { windowData.EventCallback = callback; }

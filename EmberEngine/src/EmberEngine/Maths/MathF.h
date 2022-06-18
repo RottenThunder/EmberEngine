@@ -2,6 +2,8 @@
 
 namespace EmberEngine
 {
+	void MathFInit();
+
 	class MathF
 	{
 	protected:

@@ -2,6 +2,7 @@
 #include "EmberEnginePCH.h"
 #include "Base.h"
 #include "EmberEngine/Events/Event.h"
+#include "EmberEngine/Renderer/GraphicsContext.h"
 
 namespace EmberEngine
 {
@@ -24,6 +25,7 @@ namespace EmberEngine
 		virtual uint16_t GetHeight() const = 0;
 		virtual uint16_t GetPosX() const = 0;
 		virtual uint16_t GetPosY() const = 0;
+		virtual GraphicsContext* GetGraphicsContext() const = 0;
 		virtual void* GetNativeWindow() const = 0;
 
 		virtual void SetEventCallback(const std::function<void(Event&)>& callback) = 0;

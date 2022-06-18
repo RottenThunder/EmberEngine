@@ -1,5 +1,6 @@
 #include "EmberEnginePCH.h"
 #include "Application.h"
+#include "ProcessorAnalyser.h"
 #include <glad/glad.h> //For the Clear Colour
 
 namespace EmberEngine
@@ -11,6 +12,9 @@ namespace EmberEngine
 	{
 		EMBER_REVERSE_ASSERT(Instance, "Application already exists");
 		Instance = this;
+
+		std::cout << "CPU: " << ProcessorAnalyser::Brand << std::endl;
+		std::cout << "GPU: " << MainWindow->GetGraphicsContext()->GetGPU() << std::endl;
 
 		MainWindow->SetEventCallback(EMBER_BIND_EVENT_FUNCTION(OnEvent));
 

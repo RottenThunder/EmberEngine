@@ -8,7 +8,7 @@ namespace EmberEngine
 	public:
 		float x, y, z, w;
 	public:
-		Vector4f() { Reset(); }
+		Vector4f() { MathF::ResetVector4(&x); }
 
 		inline void Reset() { MathF::ResetVector4(&x); }
 		inline void Add(Vector4f vec) { MathF::Vector4Add(&x, &x, &vec.x); }
@@ -34,7 +34,7 @@ namespace EmberEngine
 	public:
 		double x, y, z, w;
 	public:
-		Vector4d() { Reset(); }
+		Vector4d() { MathF::ResetVector4(&x); }
 
 		inline void Reset() { MathF::ResetVector4(&x); }
 		inline void Add(Vector4d vec) { MathF::Vector4Add(&x, &x, &vec.x); }
@@ -59,7 +59,7 @@ namespace EmberEngine
 	public:
 		int x, y, z, w;
 	public:
-		Vector4i() { Reset(); }
+		Vector4i() { MathF::ResetVector4(&x); }
 
 		inline void Reset() { MathF::ResetVector4(&x); }
 		inline void Add(Vector4i vec) { MathF::Vector4Add(&x, &x, &vec.x); }

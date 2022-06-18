@@ -18,12 +18,17 @@ namespace EmberEngine
 		int32_t gladInitStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		EMBER_ASSERT(gladInitStatus, "Failed to initialise Glad!!!");
 
-		std::cout << "GPU: " << glGetString(GL_RENDERER) << std::endl;
-		std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+		GPU = (const char*)glGetString(GL_RENDERER);
+		Version = (const char*)glGetString(GL_VERSION);
 	}
 
 	void OpenGLContext::SwapBuffers()
 	{
 		glfwSwapBuffers(WindowHandle);
+	}
+
+	std::string OpenGLContext::GetGPU()
+	{
+		return GPU;
 	}
 }

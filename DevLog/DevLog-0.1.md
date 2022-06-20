@@ -52,3 +52,12 @@
     - The Engine now analyses the host's processor to see which level of SIMD, the processor can support
     - It can also extract the the name of the processor
     - Other miscellaneous bug fixes were added
+
+## Version 0.1.5 (20/06/2022)
+- Normalisation and scalar values
+    - The Vector classes now has the ability to do the process of normalisation
+        - Normalisation is the process of turning a vector to an equivalent version that has a magnitude of 1
+        - This is done by calculating the magnitude of the vector and then dividing each of the vector's components by the magnitude
+    - Vectors can now be multiplied and divided by a scalar value
+        - This will do the said operation to each of the vector's components with a specified scalar value
+    - SSSE3 instructions have also been added for all the MathF functions that have been added so far

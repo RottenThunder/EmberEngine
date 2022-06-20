@@ -3,6 +3,8 @@
 
 namespace EmberEngine
 {
+	//Vector2 Implementation
+
 	void MathF_SSE2::ResetVector2Impl(float* vec)
 	{
 		_mm_storeu_ps(vec, _mm_setzero_ps());
@@ -64,6 +66,22 @@ namespace EmberEngine
 		dst[1] = vec1[1] * vec2[1];
 	}
 
+	void MathF_SSE2::Vector2MulImpl(float* dst, float* vec, float scalar)
+	{
+		_mm_storeu_ps(dst, _mm_mul_ps(_mm_loadu_ps(vec), _mm_set1_ps(scalar)));
+	}
+
+	void MathF_SSE2::Vector2MulImpl(double* dst, double* vec, double scalar)
+	{
+		_mm_storeu_pd(dst, _mm_mul_pd(_mm_loadu_pd(vec), _mm_set1_pd(scalar)));
+	}
+
+	void MathF_SSE2::Vector2MulImpl(int* dst, int* vec, int scalar)
+	{
+		dst[0] = vec[0] * scalar;
+		dst[1] = vec[1] * scalar;
+	}
+
 	void MathF_SSE2::Vector2DivImpl(float* dst, float* vec1, float* vec2)
 	{
 		_mm_storeu_ps(dst, _mm_div_ps(_mm_loadu_ps(vec1), _mm_loadu_ps(vec2)));
@@ -80,7 +98,23 @@ namespace EmberEngine
 		dst[1] = vec1[1] / vec2[1];
 	}
 
-	float MathF_SSE2::Vector2Magnitude32Impl(float* vec)
+	void MathF_SSE2::Vector2DivImpl(float* dst, float* vec, float scalar)
+	{
+		_mm_storeu_ps(dst, _mm_div_ps(_mm_loadu_ps(vec), _mm_set1_ps(scalar)));
+	}
+
+	void MathF_SSE2::Vector2DivImpl(double* dst, double* vec, double scalar)
+	{
+		_mm_storeu_pd(dst, _mm_div_pd(_mm_loadu_pd(vec), _mm_set1_pd(scalar)));
+	}
+
+	void MathF_SSE2::Vector2DivImpl(int* dst, int* vec, int scalar)
+	{
+		dst[0] = vec[0] / scalar;
+		dst[1] = vec[1] / scalar;
+	}
+
+	float MathF_SSE2::Vector2MagnitudeImpl(float* vec)
 	{
 		__m128 vecReg = _mm_loadu_ps(vec);
 		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
@@ -88,14 +122,14 @@ namespace EmberEngine
 		return _mm_sqrt_ps(sqReg).m128_f32[0];
 	}
 
-	float MathF_SSE2::Vector2SqMagnitude32Impl(float* vec)
+	float MathF_SSE2::Vector2SqMagnitudeImpl(float* vec)
 	{
 		__m128 vecReg = _mm_loadu_ps(vec);
 		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
 		return sqReg.m128_f32[0] + sqReg.m128_f32[1];
 	}
 
-	double MathF_SSE2::Vector2Magnitude64Impl(double* vec)
+	double MathF_SSE2::Vector2MagnitudeImpl(double* vec)
 	{
 		__m128d vecReg = _mm_loadu_pd(vec);
 		__m128d sqReg = _mm_mul_pd(vecReg, vecReg);
@@ -103,40 +137,44 @@ namespace EmberEngine
 		return _mm_sqrt_pd(sqReg).m128d_f64[0];
 	}
 
-	double MathF_SSE2::Vector2SqMagnitude64Impl(double* vec)
+	double MathF_SSE2::Vector2SqMagnitudeImpl(double* vec)
 	{
 		__m128d vecReg = _mm_loadu_pd(vec);
 		__m128d sqReg = _mm_mul_pd(vecReg, vecReg);
 		return sqReg.m128d_f64[0] + sqReg.m128d_f64[1];
 	}
 
-	float MathF_SSE2::Vector2Magnitude32Impl(int* vec)
+	float MathF_SSE2::Vector2MagnitudeImpl(int* vec)
 	{
 		int xSq = vec[0] * vec[0];
 		int ySq = vec[1] * vec[1];
 		return std::sqrt((float)(xSq + ySq));
 	}
 
-	float MathF_SSE2::Vector2SqMagnitude32Impl(int* vec)
+	float MathF_SSE2::Vector2SqMagnitudeImpl(int* vec)
 	{
 		int xSq = vec[0] * vec[0];
 		int ySq = vec[1] * vec[1];
 		return (float)(xSq + ySq);
 	}
 
-	double MathF_SSE2::Vector2Magnitude64Impl(int* vec)
+	void MathF_SSE2::Vector2NormaliseImpl(float* vec)
 	{
-		int xSq = vec[0] * vec[0];
-		int ySq = vec[1] * vec[1];
-		return std::sqrt((double)(xSq + ySq));
+		__m128 vecReg = _mm_loadu_ps(vec);
+		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
+		sqReg.m128_f32[0] = sqReg.m128_f32[0] + sqReg.m128_f32[1];
+		_mm_storeu_ps(vec, _mm_div_ps(vecReg, _mm_set1_ps(_mm_sqrt_ps(sqReg).m128_f32[0])));
 	}
 
-	double MathF_SSE2::Vector2SqMagnitude64Impl(int* vec)
+	void MathF_SSE2::Vector2NormaliseImpl(double* vec)
 	{
-		int xSq = vec[0] * vec[0];
-		int ySq = vec[1] * vec[1];
-		return (double)(xSq + ySq);
+		__m128d vecReg = _mm_loadu_pd(vec);
+		__m128d sqReg = _mm_mul_pd(vecReg, vecReg);
+		sqReg.m128d_f64[0] = sqReg.m128d_f64[0] + sqReg.m128d_f64[1];
+		_mm_storeu_pd(vec, _mm_div_pd(vecReg, _mm_set1_pd(_mm_sqrt_pd(sqReg).m128d_f64[0])));
 	}
+
+	//Vector3 Implementation
 
 	void MathF_SSE2::ResetVector3Impl(float* vec)
 	{
@@ -208,6 +246,25 @@ namespace EmberEngine
 		dst[2] = vec1[2] * vec2[2];
 	}
 
+	void MathF_SSE2::Vector3MulImpl(float* dst, float* vec, float scalar)
+	{
+		_mm_storeu_ps(dst, _mm_mul_ps(_mm_loadu_ps(vec), _mm_set1_ps(scalar)));
+	}
+
+	void MathF_SSE2::Vector3MulImpl(double* dst, double* vec, double scalar)
+	{
+		dst[0] = vec[0] * scalar;
+		dst[1] = vec[1] * scalar;
+		dst[2] = vec[2] * scalar;
+	}
+
+	void MathF_SSE2::Vector3MulImpl(int* dst, int* vec, int scalar)
+	{
+		dst[0] = vec[0] * scalar;
+		dst[1] = vec[1] * scalar;
+		dst[2] = vec[2] * scalar;
+	}
+
 	void MathF_SSE2::Vector3DivImpl(float* dst, float* vec1, float* vec2)
 	{
 		_mm_storeu_ps(dst, _mm_div_ps(_mm_loadu_ps(vec1), _mm_loadu_ps(vec2)));
@@ -227,7 +284,26 @@ namespace EmberEngine
 		dst[2] = vec1[2] / vec2[2];
 	}
 
-	float MathF_SSE2::Vector3Magnitude32Impl(float* vec)
+	void MathF_SSE2::Vector3DivImpl(float* dst, float* vec, float scalar)
+	{
+		_mm_storeu_ps(dst, _mm_div_ps(_mm_loadu_ps(vec), _mm_set1_ps(scalar)));
+	}
+
+	void MathF_SSE2::Vector3DivImpl(double* dst, double* vec, double scalar)
+	{
+		dst[0] = vec[0] / scalar;
+		dst[1] = vec[1] / scalar;
+		dst[2] = vec[2] / scalar;
+	}
+
+	void MathF_SSE2::Vector3DivImpl(int* dst, int* vec, int scalar)
+	{
+		dst[0] = vec[0] / scalar;
+		dst[1] = vec[1] / scalar;
+		dst[2] = vec[2] / scalar;
+	}
+
+	float MathF_SSE2::Vector3MagnitudeImpl(float* vec)
 	{
 		__m128 vecReg = _mm_loadu_ps(vec);
 		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
@@ -235,14 +311,14 @@ namespace EmberEngine
 		return _mm_sqrt_ps(sqReg).m128_f32[0];
 	}
 
-	float MathF_SSE2::Vector3SqMagnitude32Impl(float* vec)
+	float MathF_SSE2::Vector3SqMagnitudeImpl(float* vec)
 	{
 		__m128 vecReg = _mm_loadu_ps(vec);
 		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
 		return sqReg.m128_f32[0] + sqReg.m128_f32[1] + sqReg.m128_f32[2];
 	}
 
-	double MathF_SSE2::Vector3Magnitude64Impl(double* vec)
+	double MathF_SSE2::Vector3MagnitudeImpl(double* vec)
 	{
 		double xSq = vec[0] * vec[0];
 		double ySq = vec[1] * vec[1];
@@ -250,7 +326,7 @@ namespace EmberEngine
 		return std::sqrt(xSq + ySq + zSq);
 	}
 
-	double MathF_SSE2::Vector3SqMagnitude64Impl(double* vec)
+	double MathF_SSE2::Vector3SqMagnitudeImpl(double* vec)
 	{
 		double xSq = vec[0] * vec[0];
 		double ySq = vec[1] * vec[1];
@@ -258,7 +334,7 @@ namespace EmberEngine
 		return xSq + ySq + zSq;
 	}
 
-	float MathF_SSE2::Vector3Magnitude32Impl(int* vec)
+	float MathF_SSE2::Vector3MagnitudeImpl(int* vec)
 	{
 		int xSq = vec[0] * vec[0];
 		int ySq = vec[1] * vec[1];
@@ -266,7 +342,7 @@ namespace EmberEngine
 		return std::sqrt((float)(xSq + ySq + zSq));
 	}
 
-	float MathF_SSE2::Vector3SqMagnitude32Impl(int* vec)
+	float MathF_SSE2::Vector3SqMagnitudeImpl(int* vec)
 	{
 		int xSq = vec[0] * vec[0];
 		int ySq = vec[1] * vec[1];
@@ -274,21 +350,26 @@ namespace EmberEngine
 		return (float)(xSq + ySq + zSq);
 	}
 
-	double MathF_SSE2::Vector3Magnitude64Impl(int* vec)
+	void MathF_SSE2::Vector3NormaliseImpl(float* vec)
 	{
-		int xSq = vec[0] * vec[0];
-		int ySq = vec[1] * vec[1];
-		int zSq = vec[2] * vec[2];
-		return std::sqrt((double)(xSq + ySq + zSq));
+		__m128 vecReg = _mm_loadu_ps(vec);
+		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
+		sqReg.m128_f32[0] = sqReg.m128_f32[0] + sqReg.m128_f32[1] + sqReg.m128_f32[2];
+		_mm_storeu_ps(vec, _mm_div_ps(vecReg, _mm_set1_ps(_mm_sqrt_ps(sqReg).m128_f32[0])));
 	}
 
-	double MathF_SSE2::Vector3SqMagnitude64Impl(int* vec)
+	void MathF_SSE2::Vector3NormaliseImpl(double* vec)
 	{
-		int xSq = vec[0] * vec[0];
-		int ySq = vec[1] * vec[1];
-		int zSq = vec[2] * vec[2];
-		return (double)(xSq + ySq + zSq);
+		double xSq = vec[0] * vec[0];
+		double ySq = vec[1] * vec[1];
+		double zSq = vec[2] * vec[2];
+		double length = std::sqrt(xSq + ySq + zSq);
+		vec[0] /= length;
+		vec[1] /= length;
+		vec[2] /= length;
 	}
+
+	//Vector4 Implementation
 
 	void MathF_SSE2::ResetVector4Impl(float* vec)
 	{
@@ -365,6 +446,27 @@ namespace EmberEngine
 		dst[3] = vec1[3] * vec2[3];
 	}
 
+	void MathF_SSE2::Vector4MulImpl(float* dst, float* vec, float scalar)
+	{
+		_mm_storeu_ps(dst, _mm_mul_ps(_mm_loadu_ps(vec), _mm_set1_ps(scalar)));
+	}
+
+	void MathF_SSE2::Vector4MulImpl(double* dst, double* vec, double scalar)
+	{
+		dst[0] = vec[0] * scalar;
+		dst[1] = vec[1] * scalar;
+		dst[2] = vec[2] * scalar;
+		dst[3] = vec[3] * scalar;
+	}
+
+	void MathF_SSE2::Vector4MulImpl(int* dst, int* vec, int scalar)
+	{
+		dst[0] = vec[0] * scalar;
+		dst[1] = vec[1] * scalar;
+		dst[2] = vec[2] * scalar;
+		dst[3] = vec[3] * scalar;
+	}
+
 	void MathF_SSE2::Vector4DivImpl(float* dst, float* vec1, float* vec2)
 	{
 		_mm_storeu_ps(dst, _mm_mul_ps(_mm_loadu_ps(vec1), _mm_loadu_ps(vec2)));
@@ -386,7 +488,28 @@ namespace EmberEngine
 		dst[3] = vec1[3] / vec2[3];
 	}
 
-	float MathF_SSE2::Vector4Magnitude32Impl(float* vec)
+	void MathF_SSE2::Vector4DivImpl(float* dst, float* vec, float scalar)
+	{
+		_mm_storeu_ps(dst, _mm_mul_ps(_mm_loadu_ps(vec), _mm_set1_ps(scalar)));
+	}
+
+	void MathF_SSE2::Vector4DivImpl(double* dst, double* vec, double scalar)
+	{
+		dst[0] = vec[0] / scalar;
+		dst[1] = vec[1] / scalar;
+		dst[2] = vec[2] / scalar;
+		dst[3] = vec[3] / scalar;
+	}
+
+	void MathF_SSE2::Vector4DivImpl(int* dst, int* vec, int scalar)
+	{
+		dst[0] = vec[0] / scalar;
+		dst[1] = vec[1] / scalar;
+		dst[2] = vec[2] / scalar;
+		dst[3] = vec[3] / scalar;
+	}
+
+	float MathF_SSE2::Vector4MagnitudeImpl(float* vec)
 	{
 		__m128 vecReg = _mm_loadu_ps(vec);
 		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
@@ -394,14 +517,14 @@ namespace EmberEngine
 		return _mm_sqrt_ps(sqReg).m128_f32[0];
 	}
 
-	float MathF_SSE2::Vector4SqMagnitude32Impl(float* vec)
+	float MathF_SSE2::Vector4SqMagnitudeImpl(float* vec)
 	{
 		__m128 vecReg = _mm_loadu_ps(vec);
 		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
 		return sqReg.m128_f32[0] + sqReg.m128_f32[1] + sqReg.m128_f32[2] + sqReg.m128_f32[3];
 	}
 
-	double MathF_SSE2::Vector4Magnitude64Impl(double* vec)
+	double MathF_SSE2::Vector4MagnitudeImpl(double* vec)
 	{
 		double xSq = vec[0] * vec[0];
 		double ySq = vec[1] * vec[1];
@@ -410,7 +533,7 @@ namespace EmberEngine
 		return std::sqrt(xSq + ySq + zSq + wSq);
 	}
 
-	double MathF_SSE2::Vector4SqMagnitude64Impl(double* vec)
+	double MathF_SSE2::Vector4SqMagnitudeImpl(double* vec)
 	{
 		double xSq = vec[0] * vec[0];
 		double ySq = vec[1] * vec[1];
@@ -419,7 +542,7 @@ namespace EmberEngine
 		return xSq + ySq + zSq + wSq;
 	}
 
-	float MathF_SSE2::Vector4Magnitude32Impl(int* vec)
+	float MathF_SSE2::Vector4MagnitudeImpl(int* vec)
 	{
 		int xSq = vec[0] * vec[0];
 		int ySq = vec[1] * vec[1];
@@ -428,7 +551,7 @@ namespace EmberEngine
 		return std::sqrt((float)(xSq + ySq + zSq + wSq));
 	}
 
-	float MathF_SSE2::Vector4SqMagnitude32Impl(int* vec)
+	float MathF_SSE2::Vector4SqMagnitudeImpl(int* vec)
 	{
 		int xSq = vec[0] * vec[0];
 		int ySq = vec[1] * vec[1];
@@ -437,21 +560,24 @@ namespace EmberEngine
 		return (float)(xSq + ySq + zSq + wSq);
 	}
 
-	double MathF_SSE2::Vector4Magnitude64Impl(int* vec)
+	void MathF_SSE2::Vector4NormaliseImpl(float* vec)
 	{
-		int xSq = vec[0] * vec[0];
-		int ySq = vec[1] * vec[1];
-		int zSq = vec[2] * vec[2];
-		int wSq = vec[3] * vec[3];
-		return std::sqrt((double)(xSq + ySq + zSq + wSq));
+		__m128 vecReg = _mm_loadu_ps(vec);
+		__m128 sqReg = _mm_mul_ps(vecReg, vecReg);
+		sqReg.m128_f32[0] = sqReg.m128_f32[0] + sqReg.m128_f32[1] + sqReg.m128_f32[2] + sqReg.m128_f32[3];
+		_mm_storeu_ps(vec, _mm_div_ps(vecReg, _mm_set1_ps(_mm_sqrt_ps(sqReg).m128_f32[0])));
 	}
 
-	double MathF_SSE2::Vector4SqMagnitude64Impl(int* vec)
+	void MathF_SSE2::Vector4NormaliseImpl(double* vec)
 	{
-		int xSq = vec[0] * vec[0];
-		int ySq = vec[1] * vec[1];
-		int zSq = vec[2] * vec[2];
-		int wSq = vec[3] * vec[3];
-		return (double)(xSq + ySq + zSq + wSq);
+		double xSq = vec[0] * vec[0];
+		double ySq = vec[1] * vec[1];
+		double zSq = vec[2] * vec[2];
+		double wSq = vec[3] * vec[3];
+		double length = std::sqrt(xSq + ySq + zSq + wSq);
+		vec[0] /= length;
+		vec[1] /= length;
+		vec[2] /= length;
+		vec[3] /= length;
 	}
 }

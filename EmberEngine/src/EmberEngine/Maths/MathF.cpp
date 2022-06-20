@@ -5,6 +5,7 @@
 #include "SIMD/MathF_SSE.h"
 #include "SIMD/MathF_SSE2.h"
 #include "SIMD/MathF_SSE3.h"
+#include "SIMD/MathF_SSSE3.h"
 
 namespace EmberEngine
 {
@@ -44,8 +45,8 @@ namespace EmberEngine
 		}
 		if (ProcessorAnalyser::SSSE3)
 		{
-			//MathF::Instance = new MathF_SSSE3();
-			//return;
+			MathF::Instance = new MathF_SSSE3();
+			return;
 		}
 		if (ProcessorAnalyser::SSE3)
 		{
@@ -61,11 +62,6 @@ namespace EmberEngine
 		{
 			MathF::Instance = new MathF_SSE();
 			return;
-		}
-		if (ProcessorAnalyser::MMX)
-		{
-			//MathF::Instance = new MathF_MMX();
-			//return;
 		}
 
 		MathF::Instance = new MathF_NULL();

@@ -12,22 +12,32 @@ namespace EmberEngine
 
 		inline void Reset() { MathF::ResetVector4(&x); }
 		inline void Add(Vector4f vec) { MathF::Vector4Add(&x, &x, &vec.x); }
-		inline void Sub(Vector4f vec) { MathF::Vector4Sub(&x, &x, &vec.x); }
-		inline void Mul(Vector4f vec) { MathF::Vector4Mul(&x, &x, &vec.x); }
-		inline void Div(Vector4f vec) { MathF::Vector4Div(&x, &x, &vec.x); }
-		inline float Magnitude() { return MathF::Vector4Magnitude32(&x); }
-		inline float SqMagnitude() { return MathF::Vector4SqMagnitude32(&x); }
+		inline void Subract(Vector4f vec) { MathF::Vector4Sub(&x, &x, &vec.x); }
+		inline void Multiply(Vector4f vec) { MathF::Vector4Mul(&x, &x, &vec.x); }
+		inline void Multiply(float scalar) { MathF::Vector4Mul(&x, &x, scalar); }
+		inline void Divide(Vector4f vec) { MathF::Vector4Div(&x, &x, &vec.x); }
+		inline void Divide(float scalar) { MathF::Vector4Div(&x, &x, scalar); }
+		inline float Magnitude() { return MathF::Vector4Magnitude(&x); }
+		inline float SqMagnitude() { return MathF::Vector4SqMagnitude(&x); }
+		inline void Normalise() { MathF::Vector4Normalise(&x); }
 	};
+
 	typedef Vector4f Vector4;
+
+	Vector4f V4Normalise(Vector4f vec);
 
 	inline Vector4f operator+(Vector4f vec1, Vector4f vec2) { Vector4f result; MathF::Vector4Add(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector4f operator-(Vector4f vec1, Vector4f vec2) { Vector4f result; MathF::Vector4Sub(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector4f operator*(Vector4f vec1, Vector4f vec2) { Vector4f result; MathF::Vector4Mul(&result.x, &vec1.x, &vec2.x); return result; }
+	inline Vector4f operator*(Vector4f vec, float scalar) { Vector4f result; MathF::Vector4Mul(&result.x, &vec.x, scalar); return result; }
 	inline Vector4f operator/(Vector4f vec1, Vector4f vec2) { Vector4f result; MathF::Vector4Div(&result.x, &vec1.x, &vec2.x); return result; }
+	inline Vector4f operator/(Vector4f vec, float scalar) { Vector4f result; MathF::Vector4Div(&result.x, &vec.x, scalar); return result; }
 	inline Vector4f& operator+= (Vector4f& vec1, Vector4f vec2) { vec1 = vec1 + vec2; return vec1; }
 	inline Vector4f& operator-= (Vector4f& vec1, Vector4f vec2) { vec1 = vec1 - vec2; return vec1; }
 	inline Vector4f& operator*= (Vector4f& vec1, Vector4f vec2) { vec1 = vec1 * vec2; return vec1; }
+	inline Vector4f& operator*= (Vector4f& vec, float scalar) { vec = vec * scalar; return vec; }
 	inline Vector4f& operator/= (Vector4f& vec1, Vector4f vec2) { vec1 = vec1 / vec2; return vec1; }
+	inline Vector4f& operator/= (Vector4f& vec, float scalar) { vec = vec / scalar; return vec; }
 
 	class Vector4d
 	{
@@ -38,21 +48,30 @@ namespace EmberEngine
 
 		inline void Reset() { MathF::ResetVector4(&x); }
 		inline void Add(Vector4d vec) { MathF::Vector4Add(&x, &x, &vec.x); }
-		inline void Sub(Vector4d vec) { MathF::Vector4Sub(&x, &x, &vec.x); }
-		inline void Mul(Vector4d vec) { MathF::Vector4Mul(&x, &x, &vec.x); }
-		inline void Div(Vector4d vec) { MathF::Vector4Div(&x, &x, &vec.x); }
-		inline double Magnitude() { return MathF::Vector4Magnitude64(&x); }
-		inline double SqMagnitude() { return MathF::Vector4SqMagnitude64(&x); }
+		inline void Subtract(Vector4d vec) { MathF::Vector4Sub(&x, &x, &vec.x); }
+		inline void Multiply(Vector4d vec) { MathF::Vector4Mul(&x, &x, &vec.x); }
+		inline void Multiply(double scalar) { MathF::Vector4Mul(&x, &x, scalar); }
+		inline void Divide(Vector4d vec) { MathF::Vector4Div(&x, &x, &vec.x); }
+		inline void Divide(double scalar) { MathF::Vector4Div(&x, &x, scalar); }
+		inline double Magnitude() { return MathF::Vector4Magnitude(&x); }
+		inline double SqMagnitude() { return MathF::Vector4SqMagnitude(&x); }
+		inline void Normalise() { MathF::Vector4Normalise(&x); }
 	};
+
+	Vector4d V4Normalise(Vector4d vec);
 
 	inline Vector4d operator+(Vector4d vec1, Vector4d vec2) { Vector4d result; MathF::Vector4Add(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector4d operator-(Vector4d vec1, Vector4d vec2) { Vector4d result; MathF::Vector4Sub(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector4d operator*(Vector4d vec1, Vector4d vec2) { Vector4d result; MathF::Vector4Mul(&result.x, &vec1.x, &vec2.x); return result; }
+	inline Vector4d operator*(Vector4d vec, double scalar) { Vector4d result; MathF::Vector4Mul(&result.x, &vec.x, scalar); return result; }
 	inline Vector4d operator/(Vector4d vec1, Vector4d vec2) { Vector4d result; MathF::Vector4Div(&result.x, &vec1.x, &vec2.x); return result; }
+	inline Vector4d operator/(Vector4d vec, double scalar) { Vector4d result; MathF::Vector4Div(&result.x, &vec.x, scalar); return result; }
 	inline Vector4d& operator+= (Vector4d& vec1, Vector4d vec2) { vec1 = vec1 + vec2; return vec1; }
 	inline Vector4d& operator-= (Vector4d& vec1, Vector4d vec2) { vec1 = vec1 - vec2; return vec1; }
 	inline Vector4d& operator*= (Vector4d& vec1, Vector4d vec2) { vec1 = vec1 * vec2; return vec1; }
+	inline Vector4d& operator*= (Vector4d& vec, double scalar) { vec = vec * scalar; return vec; }
 	inline Vector4d& operator/= (Vector4d& vec1, Vector4d vec2) { vec1 = vec1 / vec2; return vec1; }
+	inline Vector4d& operator/= (Vector4d& vec, double scalar) { vec = vec / scalar; return vec; }
 
 	class Vector4i
 	{
@@ -63,21 +82,25 @@ namespace EmberEngine
 
 		inline void Reset() { MathF::ResetVector4(&x); }
 		inline void Add(Vector4i vec) { MathF::Vector4Add(&x, &x, &vec.x); }
-		inline void Sub(Vector4i vec) { MathF::Vector4Sub(&x, &x, &vec.x); }
-		inline void Mul(Vector4i vec) { MathF::Vector4Mul(&x, &x, &vec.x); }
-		inline void Div(Vector4i vec) { MathF::Vector4Div(&x, &x, &vec.x); }
-		inline float Magnitude32() { return MathF::Vector4Magnitude32(&x); }
-		inline float SqMagnitude32() { return MathF::Vector4SqMagnitude32(&x); }
-		inline double Magnitude64() { return MathF::Vector4Magnitude64(&x); }
-		inline double SqMagnitude64() { return MathF::Vector4SqMagnitude64(&x); }
+		inline void Subtract(Vector4i vec) { MathF::Vector4Sub(&x, &x, &vec.x); }
+		inline void Multiply(Vector4i vec) { MathF::Vector4Mul(&x, &x, &vec.x); }
+		inline void Multiply(int scalar) { MathF::Vector4Mul(&x, &x, scalar); }
+		inline void Divide(Vector4i vec) { MathF::Vector4Div(&x, &x, &vec.x); }
+		inline void Divide(int scalar) { MathF::Vector4Div(&x, &x, scalar); }
+		inline float Magnitude() { return MathF::Vector4Magnitude(&x); }
+		inline float SqMagnitude() { return MathF::Vector4SqMagnitude(&x); }
 	};
 
 	inline Vector4i operator+(Vector4i vec1, Vector4i vec2) { Vector4i result; MathF::Vector4Add(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector4i operator-(Vector4i vec1, Vector4i vec2) { Vector4i result; MathF::Vector4Sub(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector4i operator*(Vector4i vec1, Vector4i vec2) { Vector4i result; MathF::Vector4Mul(&result.x, &vec1.x, &vec2.x); return result; }
+	inline Vector4i operator*(Vector4i vec, int scalar) { Vector4i result; MathF::Vector4Mul(&result.x, &vec.x, scalar); return result; }
 	inline Vector4i operator/(Vector4i vec1, Vector4i vec2) { Vector4i result; MathF::Vector4Div(&result.x, &vec1.x, &vec2.x); return result; }
+	inline Vector4i operator/(Vector4i vec, int scalar) { Vector4i result; MathF::Vector4Div(&result.x, &vec.x, scalar); return result; }
 	inline Vector4i& operator+= (Vector4i& vec1, Vector4i vec2) { vec1 = vec1 + vec2; return vec1; }
 	inline Vector4i& operator-= (Vector4i& vec1, Vector4i vec2) { vec1 = vec1 - vec2; return vec1; }
 	inline Vector4i& operator*= (Vector4i& vec1, Vector4i vec2) { vec1 = vec1 * vec2; return vec1; }
+	inline Vector4i& operator*= (Vector4i& vec, int scalar) { vec = vec * scalar; return vec; }
 	inline Vector4i& operator/= (Vector4i& vec1, Vector4i vec2) { vec1 = vec1 / vec2; return vec1; }
+	inline Vector4i& operator/= (Vector4i& vec, int scalar) { vec = vec / scalar; return vec; }
 }

@@ -98,5 +98,9 @@ namespace EmberEngine
 		virtual float Vector4SqMagnitudeImpl(int* vec) override;
 		virtual void Vector4NormaliseImpl(float* vec) override;
 		virtual void Vector4NormaliseImpl(double* vec) override;
+
+		//Matrix4x4 Implementation
+		virtual void ResetMatrix4x4Impl(float* matrix) override;
+		virtual void SetToIdentityImpl(float* matrix) override;
 	};
 }

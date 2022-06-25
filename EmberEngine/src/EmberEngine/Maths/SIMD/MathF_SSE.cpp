@@ -605,4 +605,26 @@ namespace EmberEngine
 		vec[2] /= length;
 		vec[3] /= length;
 	}
+
+	//Matrix4x4 Implementation
+
+	void MathF_SSE::ResetMatrix4x4Impl(float* matrix)
+	{
+		_mm_storeu_ps(matrix, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 4, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 8, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 12, _mm_setzero_ps());
+	}
+
+	void MathF_SSE::SetToIdentityImpl(float* matrix)
+	{
+		_mm_storeu_ps(matrix, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 4, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 8, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 12, _mm_setzero_ps());
+		matrix[0] = 1.0f;
+		matrix[5] = 1.0f;
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
 }

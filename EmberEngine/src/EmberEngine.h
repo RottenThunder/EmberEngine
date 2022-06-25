@@ -12,6 +12,7 @@
 //-------------------------------------------------------------------------
 
 //---MATHS-----------------------------------------------------------------
+#include "EmberEngine/Maths/Matrices/Matrix4x4.h"
 #include "EmberEngine/Maths/Vectors/Vector2.h"
 #include "EmberEngine/Maths/Vectors/Vector3.h"
 #include "EmberEngine/Maths/Vectors/Vector4.h"

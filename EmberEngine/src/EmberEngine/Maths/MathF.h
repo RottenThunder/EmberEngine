@@ -99,6 +99,10 @@ namespace EmberEngine
 		virtual float Vector4SqMagnitudeImpl(int* vec) = 0;
 		virtual void Vector4NormaliseImpl(float* vec) = 0;
 		virtual void Vector4NormaliseImpl(double* vec) = 0;
+
+		//Matrix4x4 Implementation
+		virtual void ResetMatrix4x4Impl(float* matrix) = 0;
+		virtual void SetToIdentityImpl(float* matrix) = 0;
 	public:
 		static MathF* Instance;
 
@@ -194,5 +198,9 @@ namespace EmberEngine
 		inline static float Vector4SqMagnitude(int* vec) { return Instance->Vector4SqMagnitudeImpl(vec); }
 		inline static void Vector4Normalise(float* vec) { Instance->Vector4NormaliseImpl(vec); }
 		inline static void Vector4Normalise(double* vec) { Instance->Vector4NormaliseImpl(vec); }
+
+		//Matrix4x4 Functions
+		inline static void ResetMatrix4x4(float* matrix) { Instance->ResetMatrix4x4Impl(matrix); }
+		inline static void SetToIdentity(float* matrix) { Instance->SetToIdentityImpl(matrix); }
 	};
 }

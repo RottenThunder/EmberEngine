@@ -61,3 +61,9 @@
     - Vectors can now be multiplied and divided by a scalar value
         - This will do the said operation to each of the vector's components with a specified scalar value
     - SSSE3 instructions have also been added for all the MathF functions that have been added so far
+
+## Version 0.1.6 (25/06/2022)
+- The Matrix
+    - A 4x4 Matrix class has been added - functionality of the class is very limited
+    - An Orthographic projection matrix can be created now
+    - SSE4.1 and SSE4.2 instructions have been added to all the functions that MathF contains

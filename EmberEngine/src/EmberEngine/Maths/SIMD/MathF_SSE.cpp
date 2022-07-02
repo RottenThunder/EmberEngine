@@ -627,4 +627,76 @@ namespace EmberEngine
 		matrix[10] = 1.0f;
 		matrix[15] = 1.0f;
 	}
+
+	void MathF_SSE::SetToTranslationImpl(float* matrix, float* vec2)
+	{
+		_mm_storeu_ps(matrix, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 4, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 8, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 12, _mm_setzero_ps());
+		matrix[0] = 1.0f;
+		matrix[3] = vec2[0];
+		matrix[5] = 1.0f;
+		matrix[7] = vec2[1];
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_SSE::SetToScaleImpl(float* matrix, float* vec2)
+	{
+		_mm_storeu_ps(matrix, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 4, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 8, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 12, _mm_setzero_ps());
+		matrix[0] = vec2[0];
+		matrix[5] = vec2[1];
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_SSE::SetToRotationImpl(float* matrix, float radians)
+	{
+		_mm_storeu_ps(matrix, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 4, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 8, _mm_setzero_ps());
+		_mm_storeu_ps(matrix + 12, _mm_setzero_ps());
+		float sinAngle = std::sin(radians);
+		float cosAngle = std::cos(radians);
+		matrix[0] = cosAngle;
+		matrix[1] = -sinAngle;
+		matrix[4] = sinAngle;
+		matrix[5] = cosAngle;
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_SSE::SetToTranslationWithoutResetImpl(float* matrix, float* vec2)
+	{
+		matrix[0] = 1.0f;
+		matrix[3] = vec2[0];
+		matrix[5] = 1.0f;
+		matrix[7] = vec2[1];
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_SSE::SetToScaleWithoutResetImpl(float* matrix, float* vec2)
+	{
+		matrix[0] = vec2[0];
+		matrix[5] = vec2[1];
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_SSE::SetToRotationWithoutResetImpl(float* matrix, float radians)
+	{
+		float sinAngle = std::sin(radians);
+		float cosAngle = std::cos(radians);
+		matrix[0] = cosAngle;
+		matrix[1] = -sinAngle;
+		matrix[4] = sinAngle;
+		matrix[5] = cosAngle;
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
 }

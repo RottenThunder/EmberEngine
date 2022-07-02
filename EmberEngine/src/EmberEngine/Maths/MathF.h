@@ -103,6 +103,12 @@ namespace EmberEngine
 		//Matrix4x4 Implementation
 		virtual void ResetMatrix4x4Impl(float* matrix) = 0;
 		virtual void SetToIdentityImpl(float* matrix) = 0;
+		virtual void SetToTranslationImpl(float* matrix, float* vec2) = 0;
+		virtual void SetToScaleImpl(float* matrix, float* vec2) = 0;
+		virtual void SetToRotationImpl(float* matrix, float radians) = 0;
+		virtual void SetToTranslationWithoutResetImpl(float* matrix, float* vec2) = 0;
+		virtual void SetToScaleWithoutResetImpl(float* matrix, float* vec2) = 0;
+		virtual void SetToRotationWithoutResetImpl(float* matrix, float radians) = 0;
 	public:
 		static MathF* Instance;
 
@@ -202,5 +208,11 @@ namespace EmberEngine
 		//Matrix4x4 Functions
 		inline static void ResetMatrix4x4(float* matrix) { Instance->ResetMatrix4x4Impl(matrix); }
 		inline static void SetToIdentity(float* matrix) { Instance->SetToIdentityImpl(matrix); }
+		inline static void SetToTranslation(float* matrix, float* vec2) { Instance->SetToTranslationImpl(matrix, vec2); }
+		inline static void SetToScale(float* matrix, float* vec2) { Instance->SetToScaleImpl(matrix, vec2); }
+		inline static void SetToRotation(float* matrix, float radians) { Instance->SetToRotationImpl(matrix, radians); }
+		inline static void SetToTranslationWithoutReset(float* matrix, float* vec2) { Instance->SetToTranslationWithoutResetImpl(matrix, vec2); }
+		inline static void SetToScaleWithoutReset(float* matrix, float* vec2) { Instance->SetToScaleWithoutResetImpl(matrix, vec2); }
+		inline static void SetToRotationWithoutReset(float* matrix, float radians) { Instance->SetToRotationWithoutResetImpl(matrix, radians); }
 	};
 }

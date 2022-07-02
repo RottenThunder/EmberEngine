@@ -67,3 +67,11 @@
     - A 4x4 Matrix class has been added - functionality of the class is very limited
     - An Orthographic projection matrix can be created now
     - SSE4.1 and SSE4.2 instructions have been added to all the functions that MathF contains
+
+## Version 0.1.7 (02/07/2022)
+- Matrix Functions
+    - More matrix functions have been added
+        - These functions are for creating a model matrix
+        - A model matrix is a translation, scale and rotation matrix multiplied together
+        - Although you can not multiply matrices together yet, the translation, scale amd rotation matrix creation functions have been implemented
+    - AVX instructions have been added to all the MathF functions that have been implemented so far

@@ -701,4 +701,96 @@ namespace EmberEngine
 		matrix[14] = 0.0f;
 		matrix[15] = 1.0f;
 	}
+
+	void MathF_NULL::SetToTranslationImpl(float* matrix, float* vec2)
+	{
+		matrix[0] = 1.0f;
+		matrix[1] = 0.0f;
+		matrix[2] = 0.0f;
+		matrix[3] = vec2[0];
+		matrix[4] = 0.0f;
+		matrix[5] = 1.0f;
+		matrix[6] = 0.0f;
+		matrix[7] = vec2[1];
+		matrix[8] = 0.0f;
+		matrix[9] = 0.0f;
+		matrix[10] = 1.0f;
+		matrix[11] = 0.0f;
+		matrix[12] = 0.0f;
+		matrix[13] = 0.0f;
+		matrix[14] = 0.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_NULL::SetToScaleImpl(float* matrix, float* vec2)
+	{
+		matrix[0] = vec2[0];
+		matrix[1] = 0.0f;
+		matrix[2] = 0.0f;
+		matrix[3] = 0.0f;
+		matrix[4] = 0.0f;
+		matrix[5] = vec2[1];
+		matrix[6] = 0.0f;
+		matrix[7] = 0.0f;
+		matrix[8] = 0.0f;
+		matrix[9] = 0.0f;
+		matrix[10] = 1.0f;
+		matrix[11] = 0.0f;
+		matrix[12] = 0.0f;
+		matrix[13] = 0.0f;
+		matrix[14] = 0.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_NULL::SetToRotationImpl(float* matrix, float radians)
+	{
+		float sinAngle = std::sin(radians);
+		float cosAngle = std::cos(radians);
+		matrix[0] = cosAngle;
+		matrix[1] = -sinAngle;
+		matrix[2] = 0.0f;
+		matrix[3] = 0.0f;
+		matrix[4] = sinAngle;
+		matrix[5] = cosAngle;
+		matrix[6] = 0.0f;
+		matrix[7] = 0.0f;
+		matrix[8] = 0.0f;
+		matrix[9] = 0.0f;
+		matrix[10] = 1.0f;
+		matrix[11] = 0.0f;
+		matrix[12] = 0.0f;
+		matrix[13] = 0.0f;
+		matrix[14] = 0.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_NULL::SetToTranslationWithoutResetImpl(float* matrix, float* vec2)
+	{
+		matrix[0] = 1.0f;
+		matrix[3] = vec2[0];
+		matrix[5] = 1.0f;
+		matrix[7] = vec2[1];
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_NULL::SetToScaleWithoutResetImpl(float* matrix, float* vec2)
+	{
+		matrix[0] = vec2[0];
+		matrix[5] = vec2[1];
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
+
+	void MathF_NULL::SetToRotationWithoutResetImpl(float* matrix, float radians)
+	{
+		float sinAngle = std::sin(radians);
+		float cosAngle = std::cos(radians);
+		matrix[0] = cosAngle;
+		matrix[1] = -sinAngle;
+		matrix[4] = sinAngle;
+		matrix[5] = cosAngle;
+		matrix[10] = 1.0f;
+		matrix[15] = 1.0f;
+	}
 }

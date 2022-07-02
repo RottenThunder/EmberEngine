@@ -8,6 +8,7 @@
 #include "SIMD/MathF_SSSE3.h"
 #include "SIMD/MathF_SSE41.h"
 #include "SIMD/MathF_SSE42.h"
+#include "SIMD/MathF_AVX.h"
 
 namespace EmberEngine
 {
@@ -32,8 +33,8 @@ namespace EmberEngine
 		}
 		if (ProcessorAnalyser::AVX)
 		{
-			//MathF::Instance = new MathF_AVX();
-			//return;
+			MathF::Instance = new MathF_AVX();
+			return;
 		}
 		if (ProcessorAnalyser::SSE42)
 		{

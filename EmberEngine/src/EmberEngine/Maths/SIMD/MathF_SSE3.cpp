@@ -595,6 +595,47 @@ namespace EmberEngine
 		matrix[15] = 1.0f;
 	}
 
+	void MathF_SSE3::MultiplyMatrix4x4Impl(float* dst, float* matrix1, float* matrix2)
+	{
+		float intermediate[64];
+
+		_mm_storeu_ps(intermediate, _mm_mul_ps(_mm_loadu_ps(matrix1), _mm_set1_ps(matrix2[0])));
+		_mm_storeu_ps(intermediate + 4, _mm_mul_ps(_mm_loadu_ps(matrix1 + 4), _mm_set1_ps(matrix2[1])));
+		_mm_storeu_ps(intermediate + 8, _mm_mul_ps(_mm_loadu_ps(matrix1 + 8), _mm_set1_ps(matrix2[2])));
+		_mm_storeu_ps(intermediate + 12, _mm_mul_ps(_mm_loadu_ps(matrix1 + 12), _mm_set1_ps(matrix2[3])));
+
+		_mm_storeu_ps(intermediate + 16, _mm_mul_ps(_mm_loadu_ps(matrix1), _mm_set1_ps(matrix2[4])));
+		_mm_storeu_ps(intermediate + 20, _mm_mul_ps(_mm_loadu_ps(matrix1 + 4), _mm_set1_ps(matrix2[5])));
+		_mm_storeu_ps(intermediate + 24, _mm_mul_ps(_mm_loadu_ps(matrix1 + 8), _mm_set1_ps(matrix2[6])));
+		_mm_storeu_ps(intermediate + 28, _mm_mul_ps(_mm_loadu_ps(matrix1 + 12), _mm_set1_ps(matrix2[7])));
+
+		_mm_storeu_ps(intermediate + 32, _mm_mul_ps(_mm_loadu_ps(matrix1), _mm_set1_ps(matrix2[8])));
+		_mm_storeu_ps(intermediate + 36, _mm_mul_ps(_mm_loadu_ps(matrix1 + 4), _mm_set1_ps(matrix2[9])));
+		_mm_storeu_ps(intermediate + 40, _mm_mul_ps(_mm_loadu_ps(matrix1 + 8), _mm_set1_ps(matrix2[10])));
+		_mm_storeu_ps(intermediate + 44, _mm_mul_ps(_mm_loadu_ps(matrix1 + 12), _mm_set1_ps(matrix2[11])));
+
+		_mm_storeu_ps(intermediate + 48, _mm_mul_ps(_mm_loadu_ps(matrix1), _mm_set1_ps(matrix2[12])));
+		_mm_storeu_ps(intermediate + 52, _mm_mul_ps(_mm_loadu_ps(matrix1 + 4), _mm_set1_ps(matrix2[13])));
+		_mm_storeu_ps(intermediate + 56, _mm_mul_ps(_mm_loadu_ps(matrix1 + 8), _mm_set1_ps(matrix2[14])));
+		_mm_storeu_ps(intermediate + 60, _mm_mul_ps(_mm_loadu_ps(matrix1 + 12), _mm_set1_ps(matrix2[15])));
+
+		_mm_storeu_ps(intermediate, _mm_add_ps(_mm_loadu_ps(intermediate), _mm_loadu_ps(intermediate + 4)));
+		_mm_storeu_ps(intermediate + 8, _mm_add_ps(_mm_loadu_ps(intermediate + 8), _mm_loadu_ps(intermediate + 12)));
+		_mm_storeu_ps(dst, _mm_add_ps(_mm_loadu_ps(intermediate), _mm_loadu_ps(intermediate + 8)));
+
+		_mm_storeu_ps(intermediate + 16, _mm_add_ps(_mm_loadu_ps(intermediate + 16), _mm_loadu_ps(intermediate + 20)));
+		_mm_storeu_ps(intermediate + 24, _mm_add_ps(_mm_loadu_ps(intermediate + 24), _mm_loadu_ps(intermediate + 28)));
+		_mm_storeu_ps(dst + 4, _mm_add_ps(_mm_loadu_ps(intermediate + 16), _mm_loadu_ps(intermediate + 24)));
+
+		_mm_storeu_ps(intermediate + 32, _mm_add_ps(_mm_loadu_ps(intermediate + 32), _mm_loadu_ps(intermediate + 36)));
+		_mm_storeu_ps(intermediate + 40, _mm_add_ps(_mm_loadu_ps(intermediate + 40), _mm_loadu_ps(intermediate + 44)));
+		_mm_storeu_ps(dst + 8, _mm_add_ps(_mm_loadu_ps(intermediate + 32), _mm_loadu_ps(intermediate + 40)));
+
+		_mm_storeu_ps(intermediate + 48, _mm_add_ps(_mm_loadu_ps(intermediate + 48), _mm_loadu_ps(intermediate + 52)));
+		_mm_storeu_ps(intermediate + 56, _mm_add_ps(_mm_loadu_ps(intermediate + 56), _mm_loadu_ps(intermediate + 60)));
+		_mm_storeu_ps(dst + 12, _mm_add_ps(_mm_loadu_ps(intermediate + 48), _mm_loadu_ps(intermediate + 56)));
+	}
+
 	void MathF_SSE3::SetToTranslationImpl(float* matrix, float* vec2)
 	{
 		_mm_storeu_ps(matrix, _mm_setzero_ps());
@@ -602,10 +643,10 @@ namespace EmberEngine
 		_mm_storeu_ps(matrix + 8, _mm_setzero_ps());
 		_mm_storeu_ps(matrix + 12, _mm_setzero_ps());
 		matrix[0] = 1.0f;
-		matrix[3] = vec2[0];
 		matrix[5] = 1.0f;
-		matrix[7] = vec2[1];
 		matrix[10] = 1.0f;
+		matrix[12] = vec2[0];
+		matrix[13] = vec2[1];
 		matrix[15] = 1.0f;
 	}
 
@@ -630,8 +671,8 @@ namespace EmberEngine
 		float sinAngle = std::sin(radians);
 		float cosAngle = std::cos(radians);
 		matrix[0] = cosAngle;
-		matrix[1] = -sinAngle;
-		matrix[4] = sinAngle;
+		matrix[1] = sinAngle;
+		matrix[4] = -sinAngle;
 		matrix[5] = cosAngle;
 		matrix[10] = 1.0f;
 		matrix[15] = 1.0f;
@@ -640,10 +681,10 @@ namespace EmberEngine
 	void MathF_SSE3::SetToTranslationWithoutResetImpl(float* matrix, float* vec2)
 	{
 		matrix[0] = 1.0f;
-		matrix[3] = vec2[0];
 		matrix[5] = 1.0f;
-		matrix[7] = vec2[1];
 		matrix[10] = 1.0f;
+		matrix[12] = vec2[0];
+		matrix[13] = vec2[1];
 		matrix[15] = 1.0f;
 	}
 
@@ -660,8 +701,8 @@ namespace EmberEngine
 		float sinAngle = std::sin(radians);
 		float cosAngle = std::cos(radians);
 		matrix[0] = cosAngle;
-		matrix[1] = -sinAngle;
-		matrix[4] = sinAngle;
+		matrix[1] = sinAngle;
+		matrix[4] = -sinAngle;
 		matrix[5] = cosAngle;
 		matrix[10] = 1.0f;
 		matrix[15] = 1.0f;

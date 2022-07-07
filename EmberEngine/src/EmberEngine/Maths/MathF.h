@@ -103,6 +103,7 @@ namespace EmberEngine
 		//Matrix4x4 Implementation
 		virtual void ResetMatrix4x4Impl(float* matrix) = 0;
 		virtual void SetToIdentityImpl(float* matrix) = 0;
+		virtual void MultiplyMatrix4x4Impl(float* dst, float* matrix1, float* matrix2) = 0;
 		virtual void SetToTranslationImpl(float* matrix, float* vec2) = 0;
 		virtual void SetToScaleImpl(float* matrix, float* vec2) = 0;
 		virtual void SetToRotationImpl(float* matrix, float radians) = 0;
@@ -208,6 +209,7 @@ namespace EmberEngine
 		//Matrix4x4 Functions
 		inline static void ResetMatrix4x4(float* matrix) { Instance->ResetMatrix4x4Impl(matrix); }
 		inline static void SetToIdentity(float* matrix) { Instance->SetToIdentityImpl(matrix); }
+		inline static void MultiplyMatrix4x4(float* dst, float* matrix1, float* matrix2) { Instance->MultiplyMatrix4x4Impl(dst, matrix1, matrix2); }
 		inline static void SetToTranslation(float* matrix, float* vec2) { Instance->SetToTranslationImpl(matrix, vec2); }
 		inline static void SetToScale(float* matrix, float* vec2) { Instance->SetToScaleImpl(matrix, vec2); }
 		inline static void SetToRotation(float* matrix, float radians) { Instance->SetToRotationImpl(matrix, radians); }

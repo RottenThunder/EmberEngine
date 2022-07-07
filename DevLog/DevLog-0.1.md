@@ -75,3 +75,10 @@
         - A model matrix is a translation, scale and rotation matrix multiplied together
         - Although you can not multiply matrices together yet, the translation, scale amd rotation matrix creation functions have been implemented
     - AVX instructions have been added to all the MathF functions that have been implemented so far
+
+## Version 0.1.8 (07/07/2022)
+- Multiplication of Matrices
+    - Matrices can now be multiplied together
+    - A better understanding of how to implement matrices have been obtained
+        - Instead of thinking of them as the rows one by one in memory, think of them as the columns one by one in memory
+    - AVX2 and FMA Instructions have been implemented for all of the MathF Functions

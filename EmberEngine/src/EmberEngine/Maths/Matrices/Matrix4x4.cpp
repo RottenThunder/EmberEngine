@@ -10,8 +10,8 @@ namespace EmberEngine
 		translation.y1 = 1.0f;
 		translation.z2 = 1.0f;
 		translation.w3 = 1.0f;
-		translation.w0 = x;
-		translation.w1 = y;
+		translation.x3 = x;
+		translation.y3 = y;
 		return translation;
 	}
 
@@ -22,8 +22,8 @@ namespace EmberEngine
 		translation.y1 = 1.0f;
 		translation.z2 = 1.0f;
 		translation.w3 = 1.0f;
-		translation.w0 = vec2[0];
-		translation.w1 = vec2[1];
+		translation.x3 = vec2[0];
+		translation.y3 = vec2[1];
 		return translation;
 	}
 
@@ -52,12 +52,12 @@ namespace EmberEngine
 		Matrix4x4 rotation;
 		float sinAngle = std::sin(radians);
 		float cosAngle = std::cos(radians);
-		rotation.w3 = 1.0f;
-		rotation.z2 = 1.0f;
 		rotation.x0 = cosAngle;
-		rotation.x1 = sinAngle;
-		rotation.y0 = -sinAngle;
+		rotation.y0 = sinAngle;
+		rotation.x1 = -sinAngle;
 		rotation.y1 = cosAngle;
+		rotation.z2 = 1.0f;
+		rotation.w3 = 1.0f;
 		return rotation;
 	}
 
@@ -68,8 +68,8 @@ namespace EmberEngine
 		ortho.y1 = 2.0f / (top - bottom);
 		ortho.z2 = -1.0f;
 		ortho.w3 = 1.0f;
-		ortho.w0 = -(right + left) / (right - left);
-		ortho.w1 = -(top + bottom) / (top - bottom);
+		ortho.x3 = -(right + left) / (right - left);
+		ortho.y3 = -(top + bottom) / (top - bottom);
 		return ortho;
 	}
 }

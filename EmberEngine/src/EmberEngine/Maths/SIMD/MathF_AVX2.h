@@ -3,7 +3,7 @@
 
 namespace EmberEngine
 {
-	class MathF_SSE42 : public MathF
+	class MathF_AVX2 : public MathF
 	{
 	protected:
 		//Vector2 Implementation

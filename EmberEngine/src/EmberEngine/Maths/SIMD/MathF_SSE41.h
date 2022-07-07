@@ -102,6 +102,7 @@ namespace EmberEngine
 		//Matrix4x4 Implementation
 		virtual void ResetMatrix4x4Impl(float* matrix) override;
 		virtual void SetToIdentityImpl(float* matrix) override;
+		virtual void MultiplyMatrix4x4Impl(float* dst, float* matrix1, float* matrix2) override;
 		virtual void SetToTranslationImpl(float* matrix, float* vec2) override;
 		virtual void SetToScaleImpl(float* matrix, float* vec2) override;
 		virtual void SetToRotationImpl(float* matrix, float radians) override;

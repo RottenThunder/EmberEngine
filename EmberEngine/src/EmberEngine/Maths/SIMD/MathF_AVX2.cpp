@@ -327,6 +327,38 @@ namespace EmberEngine
 		_mm256_storeu_pd(vec, _mm256_div_pd(vecReg, _mm256_set1_pd(_mm256_sqrt_pd(_mm256_hadd_pd(_mm256_hadd_pd(sqReg, sqReg), _mm256_setzero_pd())).m256d_f64[0])));
 	}
 
+	float MathF_AVX2::Vector3DotImpl(float* vec1, float* vec2)
+	{
+		__m128 reg = _mm_mul_ps(_mm_loadu_ps(vec1), _mm_loadu_ps(vec2));
+		return reg.m128_f32[0] + reg.m128_f32[1] + reg.m128_f32[2];
+	}
+
+	double MathF_AVX2::Vector3DotImpl(double* vec1, double* vec2)
+	{
+		__m256d reg = _mm256_mul_pd(_mm256_loadu_pd(vec1), _mm256_loadu_pd(vec2));
+		return reg.m256d_f64[0] + reg.m256d_f64[1] + reg.m256d_f64[2];
+	}
+
+	void MathF_AVX2::Vector3CrossImpl(float* dst, float* vec1, float* vec2)
+	{
+		__m128 reg1 = _mm_loadu_ps(vec1);
+		__m128 reg2 = _mm_loadu_ps(vec2);
+		__m128 int1 = _mm_mul_ps(reg1, _mm_shuffle_ps(reg2, reg2, 0xC9));
+		__m128 int2 = _mm_mul_ps(reg2, _mm_shuffle_ps(reg1, reg1, 0xC9));
+		int1 = _mm_sub_ps(int1, int2);
+		_mm_storeu_ps(dst, _mm_shuffle_ps(int1, int1, 0xC9));
+	}
+
+	void MathF_AVX2::Vector3CrossImpl(double* dst, double* vec1, double* vec2)
+	{
+		__m256d reg1 = _mm256_loadu_pd(vec1);
+		__m256d reg2 = _mm256_loadu_pd(vec2);
+		__m256d int1 = _mm256_mul_pd(reg1, _mm256_permute4x64_pd(reg2, 0xC9));
+		__m256d int2 = _mm256_mul_pd(reg2, _mm256_permute4x64_pd(reg1, 0xC9));
+		int1 = _mm256_sub_pd(int1, int2);
+		_mm256_storeu_pd(dst, _mm256_permute4x64_pd(int1, 0xC9));
+	}
+
 	//Vector4 Implementation
 
 	void MathF_AVX2::ResetVector4Impl(float* vec)

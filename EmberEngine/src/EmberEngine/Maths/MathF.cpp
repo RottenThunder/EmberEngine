@@ -11,6 +11,7 @@
 #include "SIMD/MathF_AVX.h"
 #include "SIMD/MathF_AVX2.h"
 #include "SIMD/MathF_FMA.h"
+#include "SIMD/MathF_AVX512F.h"
 
 namespace EmberEngine
 {
@@ -20,8 +21,8 @@ namespace EmberEngine
 	{
 		if (ProcessorAnalyser::AVX512F)
 		{
-			//MathF::Instance = new MathF_AVX512F();
-			//return;
+			MathF::Instance = new MathF_AVX512F();
+			return;
 		}
 		if (ProcessorAnalyser::FMA)
 		{
@@ -70,5 +71,15 @@ namespace EmberEngine
 		}
 
 		MathF::Instance = new MathF_NULL();
+	}
+
+	float ToRadians(float degrees)
+	{
+		return (degrees * MATHF_PI) / 180.0f;
+	}
+
+	float ToDegrees(float radians)
+	{
+		return (radians * 180.0f) / MATHF_PI;
 	}
 }

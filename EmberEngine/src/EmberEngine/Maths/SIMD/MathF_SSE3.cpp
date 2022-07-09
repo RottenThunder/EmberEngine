@@ -363,6 +363,37 @@ namespace EmberEngine
 		vec[2] /= length;
 	}
 
+	float MathF_SSE3::Vector3DotImpl(float* vec1, float* vec2)
+	{
+		__m128 reg = _mm_mul_ps(_mm_loadu_ps(vec1), _mm_loadu_ps(vec2));
+		return reg.m128_f32[0] + reg.m128_f32[1] + reg.m128_f32[2];
+	}
+
+	double MathF_SSE3::Vector3DotImpl(double* vec1, double* vec2)
+	{
+		double xSq = vec1[0] * vec2[0];
+		double ySq = vec1[1] * vec2[1];
+		double zSq = vec1[2] * vec2[2];
+		return xSq + ySq + zSq;
+	}
+
+	void MathF_SSE3::Vector3CrossImpl(float* dst, float* vec1, float* vec2)
+	{
+		__m128 reg1 = _mm_loadu_ps(vec1);
+		__m128 reg2 = _mm_loadu_ps(vec2);
+		__m128 int1 = _mm_mul_ps(reg1, _mm_shuffle_ps(reg2, reg2, 0xC9));
+		__m128 int2 = _mm_mul_ps(reg2, _mm_shuffle_ps(reg1, reg1, 0xC9));
+		int1 = _mm_sub_ps(int1, int2);
+		_mm_storeu_ps(dst, _mm_shuffle_ps(int1, int1, 0xC9));
+	}
+
+	void MathF_SSE3::Vector3CrossImpl(double* dst, double* vec1, double* vec2)
+	{
+		dst[0] = vec1[1] * vec2[2] - vec2[1] * vec1[2];
+		dst[1] = vec1[2] * vec2[0] - vec2[2] * vec1[0];
+		dst[2] = vec1[0] * vec2[1] - vec2[0] * vec1[1];
+	}
+
 	//Vector4 Implementation
 
 	void MathF_SSE3::ResetVector4Impl(float* vec)

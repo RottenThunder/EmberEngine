@@ -1,5 +1,6 @@
 #pragma once
 #include "EmberEngine/Maths/MathF.h"
+#include "EmberEngine/Maths/Vectors/Vector3.h"
 
 namespace EmberEngine
 {
@@ -32,5 +33,7 @@ namespace EmberEngine
 	Matrix4x4 CreateScale(float sx, float sy);
 	Matrix4x4 CreateScale(float* vec2);
 	Matrix4x4 CreateRotation(float radians);
+	Matrix4x4 CreateView();
+	Matrix4x4 CreateView(Vector3 eye, Vector3 target, Vector3 up);
 	Matrix4x4 CreateOrthographic(float left, float right, float bottom, float top);
 }

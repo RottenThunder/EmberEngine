@@ -81,4 +81,10 @@
     - Matrices can now be multiplied together
     - A better understanding of how to implement matrices have been obtained
         - Instead of thinking of them as the rows one by one in memory, think of them as the columns one by one in memory
-    - AVX2 and FMA Instructions have been implemented for all of the MathF Functions
+    - AVX2 and FMA instructions have been implemented for all of the MathF Functions
+
+## Version 0.1.9 (09/07/2022)
+- Vector Dot and Cross products
+    - Dot and Cross products can now be computed for Vector3
+    - View matrices can be calculated aswell
+    - AVX512F instructions have been implemented for all of the MathF Functions

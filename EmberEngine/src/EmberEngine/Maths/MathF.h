@@ -1,8 +1,12 @@
 #pragma once
 
+#define MATHF_PI 3.141592741f
+
 namespace EmberEngine
 {
 	void MathFInit();
+	inline float ToRadians(float degrees);
+	inline float ToDegrees(float radians);
 
 	class MathF
 	{
@@ -68,6 +72,10 @@ namespace EmberEngine
 		virtual float Vector3SqMagnitudeImpl(int* vec) = 0;
 		virtual void Vector3NormaliseImpl(float* vec) = 0;
 		virtual void Vector3NormaliseImpl(double* vec) = 0;
+		virtual float Vector3DotImpl(float* vec1, float* vec2) = 0;
+		virtual double Vector3DotImpl(double* vec1, double* vec2) = 0;
+		virtual void Vector3CrossImpl(float* dst, float* vec1, float* vec2) = 0;
+		virtual void Vector3CrossImpl(double* dst, double* vec1, double* vec2) = 0;
 
 		//Vector4 Implementation
 		virtual void ResetVector4Impl(float* vec) = 0;
@@ -174,6 +182,10 @@ namespace EmberEngine
 		inline static float Vector3SqMagnitude(int* vec) { return Instance->Vector3SqMagnitudeImpl(vec); }
 		inline static void Vector3Normalise(float* vec) { Instance->Vector3NormaliseImpl(vec); }
 		inline static void Vector3Normalise(double* vec) { Instance->Vector3NormaliseImpl(vec); }
+		inline static float Vector3Dot(float* vec1, float* vec2) { return Instance->Vector3DotImpl(vec1, vec2); }
+		inline static double Vector3Dot(double* vec1, double* vec2) { return Instance->Vector3DotImpl(vec1, vec2); }
+		inline static void Vector3Cross(float* dst, float* vec1, float* vec2) { Instance->Vector3CrossImpl(dst, vec1, vec2); }
+		inline static void Vector3Cross(double* dst, double* vec1, double* vec2) { Instance->Vector3CrossImpl(dst, vec1, vec2); }
 
 		//Vector4 Functions
 		inline static void ResetVector4(float* vec) { Instance->ResetVector4Impl(vec); }

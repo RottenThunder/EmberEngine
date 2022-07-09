@@ -67,6 +67,10 @@ namespace EmberEngine
 		virtual float Vector3SqMagnitudeImpl(int* vec) override;
 		virtual void Vector3NormaliseImpl(float* vec) override;
 		virtual void Vector3NormaliseImpl(double* vec) override;
+		virtual float Vector3DotImpl(float* vec1, float* vec2) override;
+		virtual double Vector3DotImpl(double* vec1, double* vec2) override;
+		virtual void Vector3CrossImpl(float* dst, float* vec1, float* vec2) override;
+		virtual void Vector3CrossImpl(double* dst, double* vec1, double* vec2) override;
 
 		//Vector4 Implementation
 		virtual void ResetVector4Impl(float* vec) override;

@@ -410,6 +410,36 @@ namespace EmberEngine
 		vec[2] /= length;
 	}
 
+	float MathF_NULL::Vector3DotImpl(float* vec1, float* vec2)
+	{
+		float xSq = vec1[0] * vec2[0];
+		float ySq = vec1[1] * vec2[1];
+		float zSq = vec1[2] * vec2[2];
+		return xSq + ySq + zSq;
+	}
+
+	double MathF_NULL::Vector3DotImpl(double* vec1, double* vec2)
+	{
+		double xSq = vec1[0] * vec2[0];
+		double ySq = vec1[1] * vec2[1];
+		double zSq = vec1[2] * vec2[2];
+		return xSq + ySq + zSq;
+	}
+
+	void MathF_NULL::Vector3CrossImpl(float* dst, float* vec1, float* vec2)
+	{
+		dst[0] = vec1[1] * vec2[2] - vec2[1] * vec1[2];
+		dst[1] = vec1[2] * vec2[0] - vec2[2] * vec1[0];
+		dst[2] = vec1[0] * vec2[1] - vec2[0] * vec1[1];
+	}
+
+	void MathF_NULL::Vector3CrossImpl(double* dst, double* vec1, double* vec2)
+	{
+		dst[0] = vec1[1] * vec2[2] - vec2[1] * vec1[2];
+		dst[1] = vec1[2] * vec2[0] - vec2[2] * vec1[0];
+		dst[2] = vec1[0] * vec2[1] - vec2[0] * vec1[1];
+	}
+
 	//Vector4 Implementation
 
 	void MathF_NULL::ResetVector4Impl(float* vec)

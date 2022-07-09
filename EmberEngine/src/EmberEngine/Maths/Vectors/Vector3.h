@@ -22,11 +22,15 @@ namespace EmberEngine
 		inline float Magnitude() { return MathF::Vector3Magnitude(&x); }
 		inline float SqMagnitude() { return MathF::Vector3SqMagnitude(&x); }
 		inline void Normalise() { MathF::Vector3Normalise(&x); }
+		inline float Dot(Vector3f vec) { return MathF::Vector3Dot(&x, &vec.x); }
+		inline Vector3f Cross(Vector3f vec) { Vector3f result; MathF::Vector3Cross(&result.x, &x, &vec.x); return result; }
 	};
 
 	typedef Vector3f Vector3;
 
 	Vector3f V3Normalise(Vector3f vec);
+	float V3Dot(Vector3f vec1, Vector3f vec2);
+	Vector3f V3Cross(Vector3f vec1, Vector3f vec2);
 
 	inline Vector3f operator+(Vector3f vec1, Vector3f vec2) { Vector3f result; MathF::Vector3Add(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector3f operator-(Vector3f vec1, Vector3f vec2) { Vector3f result; MathF::Vector3Sub(&result.x, &vec1.x, &vec2.x); return result; }
@@ -60,9 +64,13 @@ namespace EmberEngine
 		inline double Magnitude() { return MathF::Vector3Magnitude(&x); }
 		inline double SqMagnitude() { return MathF::Vector3SqMagnitude(&x); }
 		inline void Normalise() { MathF::Vector3Normalise(&x); }
+		inline double Dot(Vector3d vec) { return MathF::Vector3Dot(&x, &vec.x); }
+		inline Vector3d Cross(Vector3d vec) { Vector3d result; MathF::Vector3Cross(&result.x, &x, &vec.x); return result; }
 	};
 
 	Vector3d V3Normalise(Vector3d vec);
+	double V3Dot(Vector3d vec1, Vector3d vec2);
+	Vector3d V3Cross(Vector3d vec1, Vector3d vec2);
 
 	inline Vector3d operator+(Vector3d vec1, Vector3d vec2) { Vector3d result; MathF::Vector3Add(&result.x, &vec1.x, &vec2.x); return result; }
 	inline Vector3d operator-(Vector3d vec1, Vector3d vec2) { Vector3d result; MathF::Vector3Sub(&result.x, &vec1.x, &vec2.x); return result; }

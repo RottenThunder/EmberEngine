@@ -16,6 +16,7 @@ namespace EmberEngine
 
 		virtual void Init() override;
 		virtual void SwapBuffers() override;
+		virtual std::string GetVersion() override;
 		virtual std::string GetGPU() override;
 	};
 }

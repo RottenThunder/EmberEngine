@@ -21,7 +21,7 @@ namespace EmberEngine
 		return state == GLFW_PRESS;
 	}
 
-	float WindowsInput::GetMouseXImpl()
+	float WindowsInput::GetMouseX32Impl()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double xPos;
@@ -29,11 +29,46 @@ namespace EmberEngine
 		return (float)xPos;
 	}
 
-	float WindowsInput::GetMouseYImpl()
+	float WindowsInput::GetMouseY32Impl()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double yPos;
 		glfwGetCursorPos(window, NULL, &yPos);
 		return (float)yPos;
+	}
+
+	double WindowsInput::GetMouseX64Impl()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		double xPos;
+		glfwGetCursorPos(window, &xPos, NULL);
+		return xPos;
+	}
+
+	double WindowsInput::GetMouseY64Impl()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		double yPos;
+		glfwGetCursorPos(window, NULL, &yPos);
+		return yPos;
+	}
+
+	Vector2 WindowsInput::GetMousePos32Impl()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		Vector2 input;
+		double xPos, yPos;
+		glfwGetCursorPos(window, &xPos, &yPos);
+		input.x = (float)xPos;
+		input.y = (float)yPos;
+		return input;
+	}
+
+	Vector2d WindowsInput::GetMousePos64Impl()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		Vector2d input;
+		glfwGetCursorPos(window, &input.x, &input.y);
+		return input;
 	}
 }

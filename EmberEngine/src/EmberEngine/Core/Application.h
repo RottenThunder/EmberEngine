@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "LayerStack.h"
 #include "EmberEngine/Events/ApplicationEvent.h"
+#include "EmberEngine/Renderer/Shader.h"
 
 namespace EmberEngine
 {
@@ -16,6 +17,7 @@ namespace EmberEngine
 		LayerStack layerStack;
 
 		uint32_t VertexArray, VertexBuffer, IndexBuffer;
+		std::unique_ptr<Shader> shader;
 
 		bool OnWindowClose(WindowCloseEvent& e);
 	public:

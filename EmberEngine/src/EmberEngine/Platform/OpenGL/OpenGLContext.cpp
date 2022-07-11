@@ -27,6 +27,11 @@ namespace EmberEngine
 		glfwSwapBuffers(WindowHandle);
 	}
 
+	std::string OpenGLContext::GetVersion()
+	{
+		return Version;
+	}
+
 	std::string OpenGLContext::GetGPU()
 	{
 		return GPU;

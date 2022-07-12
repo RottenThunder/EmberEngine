@@ -1,8 +1,9 @@
 #pragma once
+#include <stdint.h>
 
 #define EMBER_VERSION_MAJOR 0
 #define EMBER_VERSION_MINOR 2
-#define EMBER_VERSION_PATCH 0
+#define EMBER_VERSION_PATCH 1
 
 #if defined EMBER_CONFIG_DEBUG
 #define EMBER_ASSERTS_ENABLED

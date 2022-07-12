@@ -56,10 +56,9 @@ namespace EmberEngine
 			std::vector<GLchar> infoLog(maxLength);
 			glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
 
-			//We don't need the shader anymore.
-			glDeleteShader(fragmentShader);
-			//Either of them. Don't leak shaders.
+			//We don't need the shaders anymore. Don't leak shaders.
 			glDeleteShader(vertexShader);
+			glDeleteShader(fragmentShader);
 
 			EMBER_REVERSE_ASSERT(true, "Failed to compile Fragment Shader!\n" << infoLog.data());
 			return;

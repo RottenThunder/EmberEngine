@@ -10,3 +10,9 @@
     - The Input class has been changed
         - So instead of just having the functions that return a given position of the mouse as a float, there are now functions that return it as a double
         - Also you can retrieve the mouse position as a Vector2
+
+## Version 0.2.1 (12/07/2022)
+- Buffer Abstraction
+    - Vertex and Index Buffers have been abstracted to write generic code that will work on all platforms
+    - A base renderer class has been added
+        - So far it contains the RendererAPI that is being used

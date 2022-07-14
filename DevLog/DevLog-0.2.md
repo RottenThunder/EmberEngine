@@ -16,3 +16,11 @@
     - Vertex and Index Buffers have been abstracted to write generic code that will work on all platforms
     - A base renderer class has been added
         - So far it contains the RendererAPI that is being used
+
+## Version 0.2.2 (14/07/2022)
+- Buffer Layout Abstraction and bug fixes
+    - Buffer Layouts have been abstracted to contain Vertex attributes
+    - The bug fixes were:
+        - changed the events to hold there data as a 32-bit signed integer to avoid unneccassary casting
+        - changed the key and mouse button codes to be 32-bit signed integers
+        - changed the window class to hold it's position as a Vector2i

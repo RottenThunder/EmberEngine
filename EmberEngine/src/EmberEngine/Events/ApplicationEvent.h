@@ -1,26 +1,28 @@
 #pragma once
 #include "EmberEnginePCH.h"
 #include "Event.h"
+#include "EmberEngine/Maths/Vectors/Vector2.h"
 
 namespace EmberEngine
 {
 	class WindowMovedEvent : public Event
 	{
 	private:
-		uint16_t PosX, PosY;
+		Vector2i Pos;
 	public:
-		WindowMovedEvent(uint16_t x, uint16_t y)
-			: PosX(x), PosY(y) {}
+		WindowMovedEvent(Vector2i pos)
+			: Pos(pos) {}
 
-		inline uint16_t GetX() const { return PosX; }
-		inline uint16_t GetY() const { return PosY; }
+		inline int32_t GetX() const { return Pos.x; }
+		inline int32_t GetY() const { return Pos.y; }
+		inline Vector2i GetPos() const { return Pos; }
 
 		virtual EventType GetEventType() const override { return EventType::WindowMoved; }
 		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Application); }
 		virtual std::string GetName() const override
 		{
 			std::stringstream ss;
-			ss << "[EMBER]: WindowMovedEvent: " << PosX << ", " << PosY;
+			ss << "[EMBER]: WindowMovedEvent: " << Pos.x << ", " << Pos.y;
 			return ss.str();
 		}
 
@@ -30,13 +32,13 @@ namespace EmberEngine
 	class WindowResizeEvent : public Event
 	{
 	private:
-		uint16_t Width, Height;
+		int32_t Width, Height;
 	public:
-		WindowResizeEvent(uint16_t width, uint16_t height)
+		WindowResizeEvent(int32_t width, int32_t height)
 			: Width(width), Height(height) {}
 
-		inline uint16_t GetWidth() const { return Width; }
-		inline uint16_t GetHeight() const { return Height; }
+		inline int32_t GetWidth() const { return Width; }
+		inline int32_t GetHeight() const { return Height; }
 
 		virtual EventType GetEventType() const override { return EventType::WindowResize; }
 		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Application); }

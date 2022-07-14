@@ -35,10 +35,11 @@ namespace EmberEngine
 		void OnEvent(Event& e);
 
 		inline Window& GetWindow() { return *MainWindow; }
-		uint16_t GetWindowPosX();
-		uint16_t GetWindowPosY();
-		uint16_t GetWindowWidth();
-		uint16_t GetWindowHeight();
+		int32_t GetWindowPosX();
+		int32_t GetWindowPosY();
+		Vector2i GetWindowPos();
+		int32_t GetWindowWidth();
+		int32_t GetWindowHeight();
 	};
 
 	//Will be defined in client-side code

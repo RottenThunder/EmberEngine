@@ -53,26 +53,23 @@ namespace EmberEngine
 
 		glfwSetWindowUserPointer(WindowObject, &windowData);
 		SetVSync(true);
-		int xPos, yPos;
-		glfwGetWindowPos(WindowObject, &xPos, &yPos);
-		windowData.XPosition = static_cast<uint16_t>(xPos);
-		windowData.YPosition = static_cast<uint16_t>(yPos);
+		glfwGetWindowPos(WindowObject, &windowData.Position.x, &windowData.Position.y);
 
 		//Setting GLFW Event Callbacks
 		glfwSetWindowPosCallback(WindowObject, [](GLFWwindow* window, int32_t xPosition, int32_t yPosition)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				data.XPosition = static_cast<uint16_t>(xPosition);
-				data.YPosition = static_cast<uint16_t>(yPosition);
-				WindowMovedEvent e(data.XPosition, data.YPosition);
+				data.Position.x = xPosition;
+				data.Position.y = yPosition;
+				WindowMovedEvent e(data.Position);
 				data.EventCallback(e);
 			});
 
 		glfwSetWindowSizeCallback(WindowObject, [](GLFWwindow* window, int32_t width, int32_t height)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				data.Width = static_cast<uint16_t>(width);
-				data.Height = static_cast<uint16_t>(height);
+				data.Width = width;
+				data.Height = height;
 				WindowResizeEvent e(data.Width, data.Height);
 				data.EventCallback(e);
 			});
@@ -92,19 +89,19 @@ namespace EmberEngine
 				{
 				case GLFW_PRESS:
 				{
-					KeyPressedEvent e(static_cast<uint16_t>(key), 0);
+					KeyPressedEvent e(key, 0);
 					data.EventCallback(e);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					KeyReleasedEvent e(static_cast<uint16_t>(key));
+					KeyReleasedEvent e(key);
 					data.EventCallback(e);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					KeyPressedEvent e(static_cast<uint16_t>(key), 1); //GLFW does not keep track of the repeat count
+					KeyPressedEvent e(key, 1); //GLFW does not keep track of the repeat count
 					data.EventCallback(e);
 					break;
 				}
@@ -119,13 +116,13 @@ namespace EmberEngine
 				{
 				case GLFW_PRESS:
 				{
-					MouseButtonPressedEvent e(static_cast<uint8_t>(button));
+					MouseButtonPressedEvent e(button);
 					data.EventCallback(e);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					MouseButtonReleasedEvent e(static_cast<uint8_t>(button));
+					MouseButtonReleasedEvent e(button);
 					data.EventCallback(e);
 					break;
 				}

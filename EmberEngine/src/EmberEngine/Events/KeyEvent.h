@@ -7,13 +7,13 @@ namespace EmberEngine
 	class KeyEvent : public Event
 	{
 	protected:
-		uint16_t KeyCode;
+		int32_t KeyCode;
 
-		KeyEvent(uint16_t keyCode)
+		KeyEvent(int32_t keyCode)
 			: KeyCode(keyCode) {}
 
 	public:
-		inline uint16_t GetKeyCode() const { return KeyCode; }
+		inline int32_t GetKeyCode() const { return KeyCode; }
 
 		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::Keyboard) | static_cast<uint8_t>(EventCategory::Input); }
 	};
@@ -23,7 +23,7 @@ namespace EmberEngine
 	private:
 		uint64_t RepeatCount;
 	public:
-		KeyPressedEvent(uint16_t keyCode, uint64_t repeatCount)
+		KeyPressedEvent(int32_t keyCode, uint64_t repeatCount)
 			: KeyEvent(keyCode), RepeatCount(repeatCount) {}
 
 		inline uint64_t GetRepeatCount() const { return RepeatCount; }
@@ -41,7 +41,7 @@ namespace EmberEngine
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(uint16_t keyCode)
+		KeyReleasedEvent(int32_t keyCode)
 			: KeyEvent(keyCode) {}
 
 		virtual EventType GetEventType() const override { return EventType::KeyReleased; }

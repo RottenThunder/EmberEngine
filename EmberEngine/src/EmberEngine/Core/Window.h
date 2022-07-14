@@ -2,6 +2,7 @@
 #include "EmberEnginePCH.h"
 #include "Base.h"
 #include "EmberEngine/Events/Event.h"
+#include "EmberEngine/Maths/Vectors/Vector2.h"
 #include "EmberEngine/Renderer/GraphicsContext.h"
 
 namespace EmberEngine
@@ -9,10 +10,10 @@ namespace EmberEngine
 	struct WindowProperties
 	{
 		std::string Title;
-		uint16_t Width;
-		uint16_t Height;
+		int32_t Width;
+		int32_t Height;
 
-		WindowProperties(const std::string& title, uint16_t width, uint16_t height)
+		WindowProperties(const std::string& title, int32_t width, int32_t height)
 			: Title(title), Width(width), Height(height) {}
 	};
 
@@ -21,10 +22,11 @@ namespace EmberEngine
 	public:
 		virtual ~Window() {}
 
-		virtual uint16_t GetWidth() const = 0;
-		virtual uint16_t GetHeight() const = 0;
-		virtual uint16_t GetPosX() const = 0;
-		virtual uint16_t GetPosY() const = 0;
+		virtual int32_t GetWidth() const = 0;
+		virtual int32_t GetHeight() const = 0;
+		virtual int32_t GetPosX() const = 0;
+		virtual int32_t GetPosY() const = 0;
+		virtual Vector2i GetPos() const = 0;
 		virtual GraphicsContext* GetGraphicsContext() const = 0;
 		virtual void* GetNativeWindow() const = 0;
 

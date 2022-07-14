@@ -53,12 +53,12 @@ namespace EmberEngine
 	class MouseButtonEvent : public Event
 	{
 	protected:
-		uint8_t Button;
+		int32_t Button;
 
-		MouseButtonEvent(uint8_t button)
+		MouseButtonEvent(int32_t button)
 			: Button(button) {}
 	public:
-		inline uint8_t GetMouseButton() const { return Button; }
+		inline int32_t GetMouseButton() const { return Button; }
 
 		virtual uint8_t GetCategoryFlags() const override { return static_cast<uint8_t>(EventCategory::MouseButton) | static_cast<uint8_t>(EventCategory::Input); }
 	};
@@ -66,7 +66,7 @@ namespace EmberEngine
 	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(uint8_t button)
+		MouseButtonPressedEvent(int32_t button)
 			: MouseButtonEvent(button) {}
 
 		virtual EventType GetEventType() const override { return EventType::MouseButtonPressed; }
@@ -82,7 +82,7 @@ namespace EmberEngine
 	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(uint8_t button)
+		MouseButtonReleasedEvent(int32_t button)
 			: MouseButtonEvent(button) {}
 
 		virtual EventType GetEventType() const override { return EventType::MouseButtonReleased; }

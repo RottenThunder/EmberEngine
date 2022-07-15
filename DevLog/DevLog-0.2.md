@@ -24,3 +24,8 @@
         - changed the events to hold there data as a 32-bit signed integer to avoid unneccassary casting
         - changed the key and mouse button codes to be 32-bit signed integers
         - changed the window class to hold it's position as a Vector2i
+
+## Version 0.2.3 (15/07/2022)
+- Vertex Array Abstraction
+    - Vertex Arrays have been abstracted to contain multiple vertex buffers and an index buffer
+    - A square is now being rendered with a triangle on top of it

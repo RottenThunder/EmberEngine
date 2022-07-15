@@ -4,6 +4,7 @@
 #include "LayerStack.h"
 #include "EmberEngine/Events/ApplicationEvent.h"
 #include "EmberEngine/Renderer/Buffer.h"
+#include "EmberEngine/Renderer/VertexArray.h"
 #include "EmberEngine/Renderer/Shader.h"
 
 namespace EmberEngine
@@ -17,10 +18,13 @@ namespace EmberEngine
 		std::unique_ptr<Window> MainWindow;
 		LayerStack layerStack;
 
-		uint32_t VertexArray;
-		std::unique_ptr<VertexBuffer> vertexBuffer;
-		std::unique_ptr<IndexBuffer> indexBuffer;
-		std::unique_ptr<Shader> shader;
+		std::shared_ptr<Shader> shader;
+		std::shared_ptr<VertexArray> vertexArray;
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		std::shared_ptr<IndexBuffer> indexBuffer;
+
+		std::shared_ptr<VertexArray> squareVertexArray;
+		std::shared_ptr<Shader> shaderSquare;
 
 		bool OnWindowClose(WindowCloseEvent& e);
 	public:

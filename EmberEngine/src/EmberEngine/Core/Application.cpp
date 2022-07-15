@@ -7,38 +7,6 @@ namespace EmberEngine
 {
 	Application* Application::Instance = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-	{
-		switch (type)
-		{
-		case ShaderDataType::Vec:
-			return GL_FLOAT;
-		case ShaderDataType::Vec2:
-			return GL_FLOAT;
-		case ShaderDataType::Vec3:
-			return GL_FLOAT;
-		case ShaderDataType::Vec4:
-			return GL_FLOAT;
-		case ShaderDataType::Mat3:
-			return GL_FLOAT;
-		case ShaderDataType::Mat4:
-			return GL_FLOAT;
-		case ShaderDataType::Int:
-			return GL_INT;
-		case ShaderDataType::Int2:
-			return GL_INT;
-		case ShaderDataType::Int3:
-			return GL_INT;
-		case ShaderDataType::Int4:
-			return GL_INT;
-		case ShaderDataType::Bool:
-			return GL_BOOL;
-		}
-
-		EMBER_REVERSE_ASSERT(true, "Unknown ShaderDataType!");
-		return 0;
-	}
-
 	Application::Application()
 		: MainWindow(std::unique_ptr<Window>(Window::Create({ "Ember Engine", 1280, 720 })))
 	{
@@ -50,8 +18,7 @@ namespace EmberEngine
 
 		MainWindow->SetEventCallback(EMBER_BIND_EVENT_FUNCTION(OnEvent));
 
-		glGenVertexArrays(1, &VertexArray);
-		glBindVertexArray(VertexArray);
+		vertexArray.reset(VertexArray::Create());
 
 		float vertices[3 * 6] =
 		{
@@ -68,16 +35,11 @@ namespace EmberEngine
 		};
 		vertexBuffer->SetLayout(layout);
 
-		uint32_t index = 0;
-		for (const auto& element : vertexBuffer->GetLayout())
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataTypeToOpenGLBaseType(element.Type), false, vertexBuffer->GetLayout().GetStride(), (const void*)element.Offset);
-			index++;
-		}
+		vertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
 		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		vertexArray->SetIndexBuffer(indexBuffer);
 
 		std::string vertexSrc = R"(
 			#version 330 core
@@ -105,6 +67,61 @@ namespace EmberEngine
 		)";
 
 		shader.reset(new Shader(vertexSrc, fragmentSrc));
+
+
+
+
+
+
+		//Square
+
+		squareVertexArray.reset(VertexArray::Create());
+
+		float SquareVertices[4 * 2] =
+		{
+			-0.75f, -0.75f, //Bottom-Left
+			0.75f, -0.75f, //Bottom-Right
+			0.75f, 0.75f, //Top-Right
+			-0.75f, 0.75f //Top-Left
+		};
+
+		std::shared_ptr<VertexBuffer> squareVertexBuffer;
+		squareVertexBuffer.reset(VertexBuffer::Create(SquareVertices, sizeof(SquareVertices)));
+
+		squareVertexBuffer->SetLayout({
+			{ ShaderDataType::Vec2, "i_Position" }
+			});
+
+		squareVertexArray->AddVertexBuffer(squareVertexBuffer);
+
+		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+		std::shared_ptr<IndexBuffer> squareIndexBuffer;
+		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+
+		squareVertexArray->SetIndexBuffer(squareIndexBuffer);
+
+		std::string vertexSrcSquare = R"(
+			#version 330 core
+			layout(location = 0) in vec2 i_Position;
+			out vec2 v_Position;
+			void main()
+			{
+				v_Position = i_Position;
+				gl_Position = vec4(i_Position, 0.0, 1.0);
+			}
+		)";
+
+		std::string fragmentSrcSquare = R"(
+			#version 330 core
+			layout(location = 0) out vec4 Colour;
+			in vec2 v_Position;
+			void main()
+			{
+				Colour = vec4(0.1, v_Position + 0.5, 1.0);
+			}
+		)";
+
+		shaderSquare.reset(new Shader(vertexSrcSquare, fragmentSrcSquare));
 	}
 
 	Application::~Application()
@@ -118,9 +135,12 @@ namespace EmberEngine
 			glClearColor(1.0f, 0.25f, 0.125f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			shader->Bind();
+			shaderSquare->Bind();
+			squareVertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, squareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
-			glBindVertexArray(VertexArray);
+			shader->Bind();
+			vertexArray->Bind();
 			glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : layerStack)
@@ -128,8 +148,6 @@ namespace EmberEngine
 
 			MainWindow->OnUpdate();
 		}
-
-		glDeleteVertexArrays(1, &VertexArray);
 	}
 
 	void Application::PushLayer(Layer* layer)

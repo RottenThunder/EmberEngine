@@ -1,7 +1,7 @@
 #include "EmberEnginePCH.h"
 #include "Application.h"
 #include "ProcessorAnalyser.h"
-#include <glad/glad.h> //For the Clear Colour
+#include "EmberEngine/Renderer/Renderer.h"
 
 namespace EmberEngine
 {
@@ -17,6 +17,11 @@ namespace EmberEngine
 		std::cout << "GPU: " << MainWindow->GetGraphicsContext()->GetGPU() << std::endl;
 
 		MainWindow->SetEventCallback(EMBER_BIND_EVENT_FUNCTION(OnEvent));
+
+		clearColour.Red = 1.0f;
+		clearColour.Green = 0.25f;
+		clearColour.Blue = 0.125f;
+		clearColour.Alpha = 1.0f;
 
 		vertexArray.reset(VertexArray::Create());
 
@@ -132,16 +137,17 @@ namespace EmberEngine
 	{
 		while (Running)
 		{
-			glClearColor(1.0f, 0.25f, 0.125f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			Renderer::ClearScreen(clearColour);
+
+			Renderer::BeginScene();
 
 			shaderSquare->Bind();
-			squareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, squareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::DrawVertexArray(squareVertexArray);
 
 			shader->Bind();
-			vertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::DrawVertexArray(vertexArray);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : layerStack)
 				layer->OnUpdate();

@@ -9,10 +9,10 @@ namespace EmberEngine
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case API::None:
 			EMBER_REVERSE_ASSERT(true, "RendererAPI::None is not currently supported!");
 			return nullptr;
-		case RendererAPI::OpenGL:
+		case API::OpenGL:
 			return new OpenGLVertexArray();
 		}
 

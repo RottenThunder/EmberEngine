@@ -29,3 +29,9 @@
 - Vertex Array Abstraction
     - Vertex Arrays have been abstracted to contain multiple vertex buffers and an index buffer
     - A square is now being rendered with a triangle on top of it
+
+## Version 0.2.4 (16/07/2022)
+- Draw Call Abstraction
+    - Draw calls have been abstracted, the renderer now calls the drawing functions
+    - The renderer also clears the screen with a new class called "Colour"
+        - The class contains 4 floats corresponding to the RGBA colour scheme

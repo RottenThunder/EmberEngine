@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "LayerStack.h"
 #include "EmberEngine/Events/ApplicationEvent.h"
+#include "EmberEngine/Renderer/Colour.h"
 #include "EmberEngine/Renderer/Buffer.h"
 #include "EmberEngine/Renderer/VertexArray.h"
 #include "EmberEngine/Renderer/Shader.h"
@@ -17,6 +18,8 @@ namespace EmberEngine
 		bool Running = true;
 		std::unique_ptr<Window> MainWindow;
 		LayerStack layerStack;
+
+		Colour clearColour;
 
 		std::shared_ptr<Shader> shader;
 		std::shared_ptr<VertexArray> vertexArray;

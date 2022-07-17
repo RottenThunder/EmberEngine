@@ -13,6 +13,12 @@ namespace EmberEngine
 
 	}
 
+	void Renderer::ClearScreen(float red, float green, float blue)
+	{
+		RenderCommand::SetClearColour(red, green, blue);
+		RenderCommand::Clear();
+	}
+
 	void Renderer::ClearScreen(const Colour& colour)
 	{
 		RenderCommand::SetClearColour(colour);

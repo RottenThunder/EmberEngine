@@ -35,3 +35,8 @@
     - Draw calls have been abstracted, the renderer now calls the drawing functions
     - The renderer also clears the screen with a new class called "Colour"
         - The class contains 4 floats corresponding to the RGBA colour scheme
+
+## Version 0.2.5 (17/07/2022)
+- Transferring of code to Sandbox
+    - The testing code for the renderer has been moved from the start of the application class into the sandbox project
+    - Other bug fixes have been investigated and some were dealt with

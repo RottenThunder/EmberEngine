@@ -8,125 +8,15 @@ namespace EmberEngine
 	Application* Application::Instance = nullptr;
 
 	Application::Application()
-		: MainWindow(std::unique_ptr<Window>(Window::Create({ "Ember Engine", 1280, 720 })))
 	{
 		EMBER_REVERSE_ASSERT(Instance, "Application already exists");
 		Instance = this;
 
-		std::cout << "CPU: " << ProcessorAnalyser::Brand << std::endl;
-		std::cout << "GPU: " << MainWindow->GetGraphicsContext()->GetGPU() << std::endl;
-
+		MainWindow = std::unique_ptr<Window>(Window::Create({ "Ember Engine", 1280, 720 }));
 		MainWindow->SetEventCallback(EMBER_BIND_EVENT_FUNCTION(OnEvent));
 
-		clearColour.Red = 1.0f;
-		clearColour.Green = 0.25f;
-		clearColour.Blue = 0.125f;
-		clearColour.Alpha = 1.0f;
-
-		vertexArray.reset(VertexArray::Create());
-
-		float vertices[3 * 6] =
-		{
-			-0.5f, -0.5f, 1.0f, 0.0f, 1.0f, 1.0f, //Bottom-Left Corner
-			0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, //Bottom-Right Corner
-			0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f //Top Corner
-		};
-
-		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-		BufferLayout layout =
-		{
-			{ ShaderDataType::Vec2, "i_Position" },
-			{ ShaderDataType::Vec4, "i_Colour" }
-		};
-		vertexBuffer->SetLayout(layout);
-
-		vertexArray->AddVertexBuffer(vertexBuffer);
-
-		uint32_t indices[3] = { 0, 1, 2 };
-		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-		vertexArray->SetIndexBuffer(indexBuffer);
-
-		std::string vertexSrc = R"(
-			#version 330 core
-			layout(location = 0) in vec2 i_Position;
-			layout(location = 1) in vec4 i_Colour;
-			out vec2 v_Position;
-			out vec4 v_Colour;
-			void main()
-			{
-				v_Position = i_Position;
-				v_Colour = i_Colour;
-				gl_Position = vec4(i_Position, 0.0, 1.0);
-			}
-		)";
-
-		std::string fragmentSrc = R"(
-			#version 330 core
-			layout(location = 0) out vec4 Colour;
-			in vec2 v_Position;
-			in vec4 v_Colour;
-			void main()
-			{
-				Colour = v_Colour;
-			}
-		)";
-
-		shader.reset(new Shader(vertexSrc, fragmentSrc));
-
-
-
-
-
-
-		//Square
-
-		squareVertexArray.reset(VertexArray::Create());
-
-		float SquareVertices[4 * 2] =
-		{
-			-0.75f, -0.75f, //Bottom-Left
-			0.75f, -0.75f, //Bottom-Right
-			0.75f, 0.75f, //Top-Right
-			-0.75f, 0.75f //Top-Left
-		};
-
-		std::shared_ptr<VertexBuffer> squareVertexBuffer;
-		squareVertexBuffer.reset(VertexBuffer::Create(SquareVertices, sizeof(SquareVertices)));
-
-		squareVertexBuffer->SetLayout({
-			{ ShaderDataType::Vec2, "i_Position" }
-			});
-
-		squareVertexArray->AddVertexBuffer(squareVertexBuffer);
-
-		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<IndexBuffer> squareIndexBuffer;
-		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
-
-		squareVertexArray->SetIndexBuffer(squareIndexBuffer);
-
-		std::string vertexSrcSquare = R"(
-			#version 330 core
-			layout(location = 0) in vec2 i_Position;
-			out vec2 v_Position;
-			void main()
-			{
-				v_Position = i_Position;
-				gl_Position = vec4(i_Position, 0.0, 1.0);
-			}
-		)";
-
-		std::string fragmentSrcSquare = R"(
-			#version 330 core
-			layout(location = 0) out vec4 Colour;
-			in vec2 v_Position;
-			void main()
-			{
-				Colour = vec4(0.1, v_Position + 0.5, 1.0);
-			}
-		)";
-
-		shaderSquare.reset(new Shader(vertexSrcSquare, fragmentSrcSquare));
+		std::cout << "CPU: " << ProcessorAnalyser::Brand << std::endl;
+		std::cout << "GPU: " << MainWindow->GetGraphicsContext()->GetGPU() << std::endl;
 	}
 
 	Application::~Application()
@@ -137,18 +27,6 @@ namespace EmberEngine
 	{
 		while (Running)
 		{
-			Renderer::ClearScreen(clearColour);
-
-			Renderer::BeginScene();
-
-			shaderSquare->Bind();
-			Renderer::DrawVertexArray(squareVertexArray);
-
-			shader->Bind();
-			Renderer::DrawVertexArray(vertexArray);
-
-			Renderer::EndScene();
-
 			for (Layer* layer : layerStack)
 				layer->OnUpdate();
 

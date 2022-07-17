@@ -17,3 +17,12 @@
 #include "EmberEngine/Maths/Vectors/Vector3.h"
 #include "EmberEngine/Maths/Vectors/Vector4.h"
 //-------------------------------------------------------------------------
+
+//---RENDERER--------------------------------------------------------------
+#include "EmberEngine/Renderer/Buffer.h"
+#include "EmberEngine/Renderer/Colour.h"
+#include "EmberEngine/Renderer/RenderCommand.h"
+#include "EmberEngine/Renderer/Renderer.h"
+#include "EmberEngine/Renderer/Shader.h"
+#include "EmberEngine/Renderer/VertexArray.h"
+//-------------------------------------------------------------------------

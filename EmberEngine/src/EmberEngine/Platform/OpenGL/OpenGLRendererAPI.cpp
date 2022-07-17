@@ -4,6 +4,11 @@
 
 namespace EmberEngine
 {
+	void OpenGLRendererAPI::SetClearColour(float red, float green, float blue)
+	{
+		glClearColor(red, green, blue, 1.0f);
+	}
+
 	void OpenGLRendererAPI::SetClearColour(const Colour& colour)
 	{
 		glClearColor(colour.Red, colour.Green, colour.Blue, colour.Alpha);

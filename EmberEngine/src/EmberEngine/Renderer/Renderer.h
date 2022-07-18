@@ -14,6 +14,6 @@ namespace EmberEngine
 
 		static void ClearScreen(float red, float green, float blue);
 		static void ClearScreen(const Colour& colour);
-		static void DrawVertexArray(const std::shared_ptr<VertexArray>& vertexArray);
+		static void DrawVertexArray(const Ref<VertexArray>& vertexArray);
 	};
 }

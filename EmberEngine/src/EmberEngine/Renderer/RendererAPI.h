@@ -19,6 +19,6 @@ namespace EmberEngine
 		virtual void SetClearColour(float red, float green, float blue) = 0;
 		virtual void SetClearColour(const Colour& colour) = 0;
 		virtual void Clear() = 0;
-		virtual void Draw(const std::shared_ptr<VertexArray>& vertexArray) = 0;
+		virtual void Draw(const Ref<VertexArray>& vertexArray) = 0;
 	};
 }

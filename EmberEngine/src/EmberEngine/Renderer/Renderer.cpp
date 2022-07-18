@@ -25,7 +25,7 @@ namespace EmberEngine
 		RenderCommand::Clear();
 	}
 
-	void Renderer::DrawVertexArray(const std::shared_ptr<VertexArray>& vertexArray)
+	void Renderer::DrawVertexArray(const Ref<VertexArray>& vertexArray)
 	{
 		vertexArray->Bind();
 		RenderCommand::Draw(vertexArray);

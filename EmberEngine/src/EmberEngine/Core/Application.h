@@ -12,7 +12,7 @@ namespace EmberEngine
 		static Application* Instance;
 
 		bool Running = true;
-		std::unique_ptr<Window> MainWindow;
+		Scope<Window> MainWindow;
 		LayerStack layerStack;
 
 		bool OnWindowClose(WindowCloseEvent& e);

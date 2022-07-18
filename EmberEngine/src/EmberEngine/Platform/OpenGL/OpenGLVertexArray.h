@@ -7,8 +7,8 @@ namespace EmberEngine
 	{
 	private:
 		uint32_t RendererID;
-		std::vector<std::shared_ptr<VertexBuffer>> VertexBuffers;
-		std::shared_ptr<IndexBuffer> Index_Buffer;
+		std::vector<Ref<VertexBuffer>> VertexBuffers;
+		Ref<IndexBuffer> Index_Buffer;
 	public:
 		OpenGLVertexArray();
 		virtual ~OpenGLVertexArray();
@@ -16,10 +16,10 @@ namespace EmberEngine
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
 
-		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) override;
-		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) override;
+		virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+		virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const { return VertexBuffers; }
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const { return Index_Buffer; }
+		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const { return VertexBuffers; }
+		virtual const Ref<IndexBuffer>& GetIndexBuffer() const { return Index_Buffer; }
 	};
 }

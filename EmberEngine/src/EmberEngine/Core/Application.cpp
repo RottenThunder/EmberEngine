@@ -12,7 +12,7 @@ namespace EmberEngine
 		EMBER_REVERSE_ASSERT(Instance, "Application already exists");
 		Instance = this;
 
-		MainWindow = std::unique_ptr<Window>(Window::Create({ "Ember Engine", 1280, 720 }));
+		MainWindow = Scope<Window>(Window::Create({ "Ember Engine", 1280, 720 }));
 		MainWindow->SetEventCallback(EMBER_BIND_EVENT_FUNCTION(OnEvent));
 
 		std::cout << "CPU: " << ProcessorAnalyser::Brand << std::endl;

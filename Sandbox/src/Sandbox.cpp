@@ -4,16 +4,16 @@ class ExampleLayer : public EmberEngine::Layer
 {
 private:
 	//Square
-	std::shared_ptr<EmberEngine::VertexArray> squareVertexArray;
-	std::shared_ptr<EmberEngine::VertexBuffer> squareVertexBuffer;
-	std::shared_ptr<EmberEngine::IndexBuffer> squareIndexBuffer;
-	std::shared_ptr<EmberEngine::Shader> squareShader;
+	EmberEngine::Ref<EmberEngine::VertexArray> squareVertexArray;
+	EmberEngine::Ref<EmberEngine::VertexBuffer> squareVertexBuffer;
+	EmberEngine::Ref<EmberEngine::IndexBuffer> squareIndexBuffer;
+	EmberEngine::Ref<EmberEngine::Shader> squareShader;
 
 	//Triangle
-	std::shared_ptr<EmberEngine::VertexArray> triangleVertexArray;
-	std::shared_ptr<EmberEngine::VertexBuffer> triangleVertexBuffer;
-	std::shared_ptr<EmberEngine::IndexBuffer> triangleIndexBuffer;
-	std::shared_ptr<EmberEngine::Shader> triangleShader;
+	EmberEngine::Ref<EmberEngine::VertexArray> triangleVertexArray;
+	EmberEngine::Ref<EmberEngine::VertexBuffer> triangleVertexBuffer;
+	EmberEngine::Ref<EmberEngine::IndexBuffer> triangleIndexBuffer;
+	EmberEngine::Ref<EmberEngine::Shader> triangleShader;
 public:
 	ExampleLayer() : Layer("Example")
 	{
@@ -64,7 +64,7 @@ public:
 			}
 		)";
 
-		triangleShader.reset(new EmberEngine::Shader(vertexSrcTriangle, fragmentSrcTriangle));
+		triangleShader.reset(EmberEngine::Shader::Create(vertexSrcTriangle, fragmentSrcTriangle));
 
 
 
@@ -115,7 +115,7 @@ public:
 			}
 		)";
 
-		squareShader.reset(new EmberEngine::Shader(vertexSrcSquare, fragmentSrcSquare));
+		squareShader.reset(EmberEngine::Shader::Create(vertexSrcSquare, fragmentSrcSquare));
 	}
 
 	void OnUpdate() override

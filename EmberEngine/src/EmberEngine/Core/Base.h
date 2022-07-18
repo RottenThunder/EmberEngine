@@ -1,9 +1,9 @@
 #pragma once
-#include <stdint.h>
+#include <memory>
 
 #define EMBER_VERSION_MAJOR 0
 #define EMBER_VERSION_MINOR 2
-#define EMBER_VERSION_PATCH 5
+#define EMBER_VERSION_PATCH 6
 
 #if defined EMBER_CONFIG_DEBUG
 #define EMBER_ASSERTS_ENABLED
@@ -36,3 +36,12 @@
 #define EMBER_CPU_AVX512PF_BIT EMBER_BIT_FIELD(26)
 #define EMBER_CPU_AVX512ER_BIT EMBER_BIT_FIELD(27)
 #define EMBER_CPU_AVX512CD_BIT EMBER_BIT_FIELD(28)
+
+namespace EmberEngine
+{
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}

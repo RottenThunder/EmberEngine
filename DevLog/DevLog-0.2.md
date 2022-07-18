@@ -40,3 +40,8 @@
 - Transferring of code to Sandbox
     - The testing code for the renderer has been moved from the start of the application class into the sandbox project
     - Other bug fixes have been investigated and some were dealt with
+
+## Version 0.2.6 (18/07/2022)
+- Shader Abstraction
+    - Shaders have been abstracted properly with the ability to upload uniforms
+    - Other bug fixes have been implemented

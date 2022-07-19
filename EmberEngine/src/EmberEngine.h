@@ -9,6 +9,7 @@
 #include "EmberEngine/Core/KeyCodes.h"
 #include "EmberEngine/Core/Layer.h"
 #include "EmberEngine/Core/MouseButtonCodes.h"
+#include "EmberEngine/Core/Time.h"
 //-------------------------------------------------------------------------
 
 //---MATHS-----------------------------------------------------------------

@@ -5,6 +5,7 @@
 
 namespace EmberEngine
 {
+#if defined EMBER_PLATFORM_WINDOWS
 	Input* Input::Instance = new WindowsInput();
 
 	bool WindowsInput::IsKeyPressedImpl(uint16_t keyCode)
@@ -71,4 +72,5 @@ namespace EmberEngine
 		glfwGetCursorPos(window, &input.x, &input.y);
 		return input;
 	}
+#endif
 }

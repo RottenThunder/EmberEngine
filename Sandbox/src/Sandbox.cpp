@@ -120,6 +120,8 @@ public:
 
 	void OnUpdate() override
 	{
+		std::cout << "DeltaTime: " << EmberEngine::Time::GetDeltaTime32() << std::endl;
+
 		EmberEngine::Renderer::ClearScreen(0.25f, 0.25f, 0.25f);
 
 		EmberEngine::Renderer::BeginScene();

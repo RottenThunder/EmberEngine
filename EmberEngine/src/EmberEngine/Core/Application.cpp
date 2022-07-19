@@ -1,6 +1,7 @@
 #include "EmberEnginePCH.h"
 #include "Application.h"
 #include "ProcessorAnalyser.h"
+#include "Time.h"
 #include "EmberEngine/Renderer/Renderer.h"
 
 namespace EmberEngine
@@ -25,8 +26,12 @@ namespace EmberEngine
 
 	void Application::Run()
 	{
+		Time::Init();
+
 		while (Running)
 		{
+			Time::Measure();
+
 			for (Layer* layer : layerStack)
 				layer->OnUpdate();
 

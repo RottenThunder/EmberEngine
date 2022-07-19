@@ -7,6 +7,7 @@
 
 namespace EmberEngine
 {
+#if defined EMBER_PLATFORM_WINDOWS
 	static bool glfwInitialised = false;
 
 	static void GLFWerrorCallback(int32_t error, const char* description)
@@ -52,7 +53,7 @@ namespace EmberEngine
 		Context->Init();
 
 		glfwSetWindowUserPointer(WindowObject, &windowData);
-		SetVSync(true);
+		SetVSync(false);
 		glfwGetWindowPos(WindowObject, &windowData.Position.x, &windowData.Position.y);
 
 		//Setting GLFW Event Callbacks
@@ -170,4 +171,5 @@ namespace EmberEngine
 		glfwPollEvents();
 		Context->SwapBuffers();
 	}
+#endif
 }

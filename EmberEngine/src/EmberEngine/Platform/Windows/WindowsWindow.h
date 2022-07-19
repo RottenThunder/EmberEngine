@@ -4,6 +4,7 @@
 
 namespace EmberEngine
 {
+#if defined EMBER_PLATFORM_WINDOWS
 	class WindowsWindow : public Window
 	{
 	private:
@@ -41,4 +42,5 @@ namespace EmberEngine
 
 		virtual void OnUpdate() override;
 	};
+#endif
 }

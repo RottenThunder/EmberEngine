@@ -45,3 +45,11 @@
 - Shader Abstraction
     - Shaders have been abstracted properly with the ability to upload uniforms
     - Other bug fixes have been implemented
+
+## Version 0.2.7 (19/07/2022)
+- Delta Time
+    - Delta Time is the time taken to complete one frame
+        - It is very useful for making things move in accordance to how long each frame takes
+        - Delta Time is measured in seconds
+    - The implementation will be platform based as not all graphics APIs have the ability to track time
+        - There is only the windows implementation as of now

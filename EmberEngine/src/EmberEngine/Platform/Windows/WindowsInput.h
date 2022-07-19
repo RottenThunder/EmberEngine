@@ -3,6 +3,7 @@
 
 namespace EmberEngine
 {
+#if defined EMBER_PLATFORM_WINDOWS
 	class WindowsInput : public Input
 	{
 	protected:
@@ -15,4 +16,5 @@ namespace EmberEngine
 		virtual Vector2 GetMousePos32Impl() override;
 		virtual Vector2d GetMousePos64Impl() override;
 	};
+#endif
 }

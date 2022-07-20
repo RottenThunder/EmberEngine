@@ -10,7 +10,7 @@ namespace EmberEngine
 	private:
 		float w;
 	public:
-		Vector3f() { MathF::ResetVector4(&x); }
+		Vector3f() { w = 0.0f; }
 		Vector3f(float xf, float yf, float zf) : x(xf), y(yf), z(zf), w(0.0f) {}
 
 		inline void Reset() { MathF::ResetVector3(&x); }
@@ -53,7 +53,7 @@ namespace EmberEngine
 	private:
 		double w;
 	public:
-		Vector3d() { MathF::ResetVector4(&x); }
+		Vector3d() { w = 0.0; }
 		Vector3d(double xd, double yd, double zd) : x(xd), y(yd), z(zd), w(0.0) {}
 
 		inline void Reset() { MathF::ResetVector3(&x); }
@@ -94,7 +94,7 @@ namespace EmberEngine
 	private:
 		int w;
 	public:
-		Vector3i() { MathF::ResetVector4(&x); }
+		Vector3i() { w = 0; }
 		Vector3i(int xi, int yi, int zi) : x(xi), y(yi), z(zi), w(0) {}
 
 		inline void Reset() { MathF::ResetVector3(&x); }

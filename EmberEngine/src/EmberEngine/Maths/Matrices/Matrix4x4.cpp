@@ -7,10 +7,7 @@ namespace EmberEngine
 	Matrix4x4 CreateTranslation(float x, float y)
 	{
 		Matrix4x4 translation;
-		translation.x0 = 1.0f;
-		translation.y1 = 1.0f;
-		translation.z2 = 1.0f;
-		translation.w3 = 1.0f;
+		translation.ToIdentity();
 		translation.x3 = x;
 		translation.y3 = y;
 		return translation;
@@ -19,10 +16,7 @@ namespace EmberEngine
 	Matrix4x4 CreateTranslation(float* vec2)
 	{
 		Matrix4x4 translation;
-		translation.x0 = 1.0f;
-		translation.y1 = 1.0f;
-		translation.z2 = 1.0f;
-		translation.w3 = 1.0f;
+		translation.ToIdentity();
 		translation.x3 = vec2[0];
 		translation.y3 = vec2[1];
 		return translation;
@@ -31,6 +25,7 @@ namespace EmberEngine
 	Matrix4x4 CreateScale(float sx, float sy)
 	{
 		Matrix4x4 scale;
+		scale.Reset();
 		scale.x0 = sx;
 		scale.y1 = sy;
 		scale.z2 = 1.0f;
@@ -41,6 +36,7 @@ namespace EmberEngine
 	Matrix4x4 CreateScale(float* vec2)
 	{
 		Matrix4x4 scale;
+		scale.Reset();
 		scale.x0 = vec2[0];
 		scale.y1 = vec2[1];
 		scale.z2 = 1.0f;
@@ -51,6 +47,7 @@ namespace EmberEngine
 	Matrix4x4 CreateRotation(float radians)
 	{
 		Matrix4x4 rotation;
+		rotation.Reset();
 		float sinAngle = std::sin(radians);
 		float cosAngle = std::cos(radians);
 		rotation.x0 = cosAngle;
@@ -64,21 +61,18 @@ namespace EmberEngine
 
 	Matrix4x4 CreateView()
 	{
-		//This Function assumes that the eye is at {0, 0, -1}
+		//This Function assumes that the eye is at {0, 0, 1}
 		//This Function assumes that the target is at {0, 0, 0}
 		//This Function assumes that the up is at {0, 1, 0}
 
-		//[-1,  0,  0, -0]
-		//[ 0,  1, -0, -0]
-		//[-0, -0, -1, -1]
+		//[ 1, -0,  0, -0]
+		//[ 0,  1,  0, -0]
+		//[-0, -0,  1, -1]
 		//[ 0,  0,  0,  1]
 
 		Matrix4x4 view;
-		view.x0 = -1.0f;
-		view.y1 = 1.0f;
-		view.z2 = -1.0f;
+		view.ToIdentity();
 		view.z3 = -1.0f;
-		view.w3 = 1.0f;
 		return view;
 	}
 
@@ -100,6 +94,9 @@ namespace EmberEngine
 		view.x3 = -V3Dot(s, eye);
 		view.y3 = -V3Dot(u, eye);
 		view.z3 = V3Dot(f, eye);
+		view.w0 = 0.0f;
+		view.w1 = 0.0f;
+		view.w2 = 0.0f;
 		view.w3 = 1.0f;
 		return view;
 	}
@@ -107,6 +104,7 @@ namespace EmberEngine
 	Matrix4x4 CreateOrthographic(float left, float right, float bottom, float top)
 	{
 		Matrix4x4 ortho;
+		ortho.Reset();
 		ortho.x0 = 2.0f / (right - left);
 		ortho.y1 = 2.0f / (top - bottom);
 		ortho.z2 = -1.0f;

@@ -3,9 +3,11 @@
 
 namespace EmberEngine
 {
-	void Renderer::BeginScene()
-	{
+	Renderer::SceneData* Renderer::sceneData = new Renderer::SceneData;
 
+	void Renderer::BeginScene(OrthographicCamera& camera)
+	{
+		sceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	void Renderer::EndScene()
@@ -25,8 +27,11 @@ namespace EmberEngine
 		RenderCommand::Clear();
 	}
 
-	void Renderer::DrawVertexArray(const Ref<VertexArray>& vertexArray)
+	void Renderer::DrawVertexArray(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray)
 	{
+		shader->Bind();
+		shader->UploadUniformMatrix4x4("u_ViewProjection", sceneData->ViewProjectionMatrix);
+
 		vertexArray->Bind();
 		RenderCommand::Draw(vertexArray);
 	}

@@ -1,19 +1,28 @@
 #pragma once
 #include "EmberEngine/Core/Base.h"
 #include "RenderCommand.h"
+#include "OrthographicCamera.h"
+#include "Shader.h"
 
 namespace EmberEngine
 {
 	class Renderer
 	{
+	private:
+		struct SceneData
+		{
+			Matrix4x4 ViewProjectionMatrix;
+		};
+
+		static SceneData* sceneData;
 	public:
 		inline static API GetAPI() { return RendererAPI::GetAPI(); }
 
-		static void BeginScene();
+		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 
 		static void ClearScreen(float red, float green, float blue);
 		static void ClearScreen(const Colour& colour);
-		static void DrawVertexArray(const Ref<VertexArray>& vertexArray);
+		static void DrawVertexArray(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray);
 	};
 }

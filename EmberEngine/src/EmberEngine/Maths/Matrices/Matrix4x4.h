@@ -12,7 +12,7 @@ namespace EmberEngine
 		float x2, y2, z2, w2;	   //[z0, z1, z2, z3]
 		float x3, y3, z3, w3;	   //[w0, w1, w2, w3]
 	public:
-		Matrix4x4() { MathF::ResetMatrix4x4(&x0); }
+		Matrix4x4() {}
 
 		inline void Reset() { MathF::ResetMatrix4x4(&x0); }
 		inline void ToIdentity() { MathF::SetToIdentity(&x0); }

@@ -5,8 +5,8 @@
 namespace EmberEngine
 {
 	void MathFInit();
-	inline float ToRadians(float degrees);
-	inline float ToDegrees(float radians);
+	float ToRadians(float degrees);
+	float ToDegrees(float radians);
 
 	class MathF
 	{

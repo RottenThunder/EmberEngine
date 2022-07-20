@@ -14,8 +14,12 @@ private:
 	EmberEngine::Ref<EmberEngine::VertexBuffer> triangleVertexBuffer;
 	EmberEngine::Ref<EmberEngine::IndexBuffer> triangleIndexBuffer;
 	EmberEngine::Ref<EmberEngine::Shader> triangleShader;
+
+	//Camera
+	EmberEngine::OrthographicCamera orthoCamera;
+	EmberEngine::Vector2 cameraPosition;
 public:
-	ExampleLayer() : Layer("Example")
+	ExampleLayer() : Layer("Example"), orthoCamera(-1.6f, 1.6f, -0.9f, 0.9f), cameraPosition(0.0f, 0.0f)
 	{
 		//Triangle
 
@@ -46,11 +50,12 @@ public:
 			#version 330 core
 			layout(location = 0) in vec2 i_Position;
 			layout(location = 1) in vec4 i_Colour;
+			uniform mat4 u_ViewProjection;
 			out vec4 v_Colour;
 			void main()
 			{
 				v_Colour = i_Colour;
-				gl_Position = vec4(i_Position, 0.0, 1.0);
+				gl_Position = u_ViewProjection * vec4(i_Position, 0.0, 1.0);
 			}
 		)";
 
@@ -98,10 +103,11 @@ public:
 			#version 330 core
 			layout(location = 0) in vec2 i_Position;
 			out vec2 v_Position;
+			uniform mat4 u_ViewProjection;
 			void main()
 			{
 				v_Position = i_Position;
-				gl_Position = vec4(i_Position, 0.0, 1.0);
+				gl_Position = u_ViewProjection * vec4(i_Position, 0.0, 1.0);
 			}
 		)";
 
@@ -120,24 +126,36 @@ public:
 
 	void OnUpdate() override
 	{
-		std::cout << "DeltaTime: " << EmberEngine::Time::GetDeltaTime32() << std::endl;
+		//std::cout << "DeltaTime: " << EmberEngine::Time::GetDeltaTime32() << std::endl;
 
 		EmberEngine::Renderer::ClearScreen(0.25f, 0.25f, 0.25f);
 
-		EmberEngine::Renderer::BeginScene();
+		if (EmberEngine::Input::IsKeyPressed(EMBER_KEY_A))
+		{
+			cameraPosition.x -= EmberEngine::Time::GetDeltaTime32();
+		}
+		if (EmberEngine::Input::IsKeyPressed(EMBER_KEY_D))
+		{
+			cameraPosition.x += EmberEngine::Time::GetDeltaTime32();
+		}
+		if (EmberEngine::Input::IsKeyPressed(EMBER_KEY_W))
+		{
+			cameraPosition.y += EmberEngine::Time::GetDeltaTime32();
+		}
+		if (EmberEngine::Input::IsKeyPressed(EMBER_KEY_S))
+		{
+			cameraPosition.y -= EmberEngine::Time::GetDeltaTime32();
+		}
 
-		squareShader->Bind();
-		EmberEngine::Renderer::DrawVertexArray(squareVertexArray);
+		EmberEngine::Renderer::BeginScene(orthoCamera);
 
-		triangleShader->Bind();
-		EmberEngine::Renderer::DrawVertexArray(triangleVertexArray);
+		EmberEngine::Renderer::DrawVertexArray(squareShader, squareVertexArray);
+
+		EmberEngine::Renderer::DrawVertexArray(triangleShader, triangleVertexArray);
 
 		EmberEngine::Renderer::EndScene();
 
-		if (EmberEngine::Input::IsKeyPressed(EMBER_KEY_A))
-		{
-			std::cout << "A Key Was Pressed!" << std::endl;
-		}
+		orthoCamera.SetPositionAndRotation(cameraPosition, orthoCamera.GetRotation() + EmberEngine::Time::GetDeltaTime32() * 10.0f);
 	}
 
 	void OnEvent(EmberEngine::Event& e) override

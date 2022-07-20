@@ -53,3 +53,11 @@
         - Delta Time is measured in seconds
     - The implementation will be platform based as not all graphics APIs have the ability to track time
         - There is only the windows implementation as of now
+
+## Version 0.2.8 (20/07/2022)
+- Orthographic Cameras
+    - An orthographic camera class has been made
+        - It contains the view and the projection matrix
+        - It can also rotate itself and move position
+    - The Vector classes have been changed so that upon construction it does not set all of it's components to 0
+        - It only sets the unused components to 0

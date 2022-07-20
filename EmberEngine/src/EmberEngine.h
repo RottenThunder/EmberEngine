@@ -22,6 +22,7 @@
 //---RENDERER--------------------------------------------------------------
 #include "EmberEngine/Renderer/Buffer.h"
 #include "EmberEngine/Renderer/Colour.h"
+#include "EmberEngine/Renderer/OrthographicCamera.h"
 #include "EmberEngine/Renderer/RenderCommand.h"
 #include "EmberEngine/Renderer/Renderer.h"
 #include "EmberEngine/Renderer/Shader.h"

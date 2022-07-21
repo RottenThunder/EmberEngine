@@ -27,6 +27,11 @@ namespace EmberEngine
 		RenderCommand::Clear();
 	}
 
+	void Renderer::OnWindowResize(int32_t width, int32_t height)
+	{
+		RenderCommand::SetViewport(0, 0, width, height);
+	}
+
 	void Renderer::DrawVertexArray(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray)
 	{
 		shader->Bind();

@@ -23,6 +23,7 @@ namespace EmberEngine
 
 		static void ClearScreen(float red, float green, float blue);
 		static void ClearScreen(const Colour& colour);
+		static void OnWindowResize(int32_t width, int32_t height);
 		static void DrawVertexArray(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray);
 	};
 }

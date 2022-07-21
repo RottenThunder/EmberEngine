@@ -26,14 +26,15 @@ namespace EmberEngine
 
 	void Application::Run()
 	{
-		Time::Init();
-
 		while (Running)
 		{
 			Time::Measure();
 
-			for (Layer* layer : layerStack)
-				layer->OnUpdate();
+			if (!Minimised)
+			{
+				for (Layer* layer : layerStack)
+					layer->OnUpdate();
+			}
 
 			MainWindow->OnUpdate();
 		}
@@ -53,6 +54,7 @@ namespace EmberEngine
 	{
 		EventDispatcher eventDispatcher(e);
 		eventDispatcher.Dispatch<WindowCloseEvent>(EMBER_BIND_EVENT_FUNCTION(OnWindowClose));
+		eventDispatcher.Dispatch<WindowResizeEvent>(EMBER_BIND_EVENT_FUNCTION(OnWindowResize));
 
 		for (auto it = layerStack.end(); it != layerStack.begin();)
 		{
@@ -60,6 +62,20 @@ namespace EmberEngine
 			if (e.handled)
 				break;
 		}
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0)
+		{
+			Minimised = true;
+			return false;
+		}
+
+		Minimised = false;
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+		return false;
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)

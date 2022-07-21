@@ -19,6 +19,11 @@ namespace EmberEngine
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	void OpenGLRendererAPI::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
+	{
+		glViewport(x, y, width, height);
+	}
+
 	void OpenGLRendererAPI::Draw(const Ref<VertexArray>& vertexArray)
 	{
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);

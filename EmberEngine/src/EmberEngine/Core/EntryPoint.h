@@ -8,8 +8,8 @@ extern EmberEngine::Application* EmberEngine::CreateApplication();
 int main()
 {
 	EmberEngine::ProcessorAnalyser::Analyse();
-
 	EmberEngine::MathFInit();
+	EmberEngine::Time::Init();
 
 	auto app = EmberEngine::CreateApplication();
 	app->Run();

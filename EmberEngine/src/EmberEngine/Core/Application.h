@@ -12,9 +12,11 @@ namespace EmberEngine
 		static Application* Instance;
 
 		bool Running = true;
+		bool Minimised = false;
 		Scope<Window> MainWindow;
 		LayerStack layerStack;
 
+		bool OnWindowResize(WindowResizeEvent& e);
 		bool OnWindowClose(WindowCloseEvent& e);
 	public:
 		Application();

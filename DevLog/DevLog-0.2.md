@@ -61,3 +61,7 @@
         - It can also rotate itself and move position
     - The Vector classes have been changed so that upon construction it does not set all of it's components to 0
         - It only sets the unused components to 0
+
+## Version 0.2.9 (21/07/2022)
+- Window Resizing
+    - The window can be resized and the viewport will automatically change according to how big the new window size is

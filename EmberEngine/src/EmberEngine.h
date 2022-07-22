@@ -26,5 +26,6 @@
 #include "EmberEngine/Renderer/RenderCommand.h"
 #include "EmberEngine/Renderer/Renderer.h"
 #include "EmberEngine/Renderer/Shader.h"
+#include "EmberEngine/Renderer/Texture.h"
 #include "EmberEngine/Renderer/VertexArray.h"
 //-------------------------------------------------------------------------

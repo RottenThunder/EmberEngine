@@ -1,8 +1,5 @@
 #include "EmberEnginePCH.h"
 #include "Application.h"
-#include "ProcessorAnalyser.h"
-#include "Time.h"
-#include "EmberEngine/Renderer/Renderer.h"
 
 namespace EmberEngine
 {
@@ -16,12 +13,22 @@ namespace EmberEngine
 		MainWindow = Scope<Window>(Window::Create({ "Ember Engine", 1280, 720 }));
 		MainWindow->SetEventCallback(EMBER_BIND_EVENT_FUNCTION(OnEvent));
 
+		Init();
+
 		std::cout << "CPU: " << ProcessorAnalyser::Brand << std::endl;
 		std::cout << "GPU: " << MainWindow->GetGraphicsContext()->GetGPU() << std::endl;
 	}
 
 	Application::~Application()
 	{
+	}
+
+	void Application::Init()
+	{
+		EmberEngine::ProcessorAnalyser::Analyse();
+		EmberEngine::MathFInit();
+		EmberEngine::Time::Init();
+		EmberEngine::Renderer::Init();
 	}
 
 	void Application::Run()

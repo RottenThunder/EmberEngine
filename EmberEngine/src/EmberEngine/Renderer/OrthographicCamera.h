@@ -18,9 +18,11 @@ namespace EmberEngine
 	public:
 		OrthographicCamera(float left, float right, float bottom, float top);
 
-		void SetPosition(const Vector2& position) { Position = position; RecalculateViewMatrix(); }
-		void SetRotation(float rotation) { Rotation = rotation; RecalculateViewMatrix(); }
-		void SetPositionAndRotation(const Vector2& position, float rotation) { Position = position; Rotation = rotation; RecalculateViewMatrix(); }
+		void SetProjection(float left, float right, float bottom, float top);
+		void SetPosition(const Vector2& position);
+		void SetRotation(float rotation);
+		void SetPositionAndRotation(const Vector2& position, float rotation);
+		void SetPositionAndRotationAndProjection(float left, float right, float bottom, float top, const Vector2& position, float rotation);
 
 		const Vector2& GetPosition() const { return Position; }
 		float GetRotation() const { return Rotation; }

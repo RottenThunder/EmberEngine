@@ -4,6 +4,12 @@
 
 namespace EmberEngine
 {
+	void OpenGLRendererAPI::Init()
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
 	void OpenGLRendererAPI::SetClearColour(float red, float green, float blue)
 	{
 		glClearColor(red, green, blue, 1.0f);

@@ -16,6 +16,8 @@ namespace EmberEngine
 	public:
 		inline static API GetAPI() { return CurrentAPI; }
 
+		virtual void Init() = 0;
+
 		virtual void SetClearColour(float red, float green, float blue) = 0;
 		virtual void SetClearColour(const Colour& colour) = 0;
 		virtual void Clear() = 0;

@@ -8,6 +8,7 @@ private:
 	EmberEngine::Ref<EmberEngine::VertexBuffer> squareVertexBuffer;
 	EmberEngine::Ref<EmberEngine::IndexBuffer> squareIndexBuffer;
 	EmberEngine::Ref<EmberEngine::Shader> squareShader;
+	EmberEngine::Ref<EmberEngine::Texture> squareTexture;
 
 	//Triangle
 	EmberEngine::Ref<EmberEngine::VertexArray> triangleVertexArray;
@@ -23,7 +24,7 @@ public:
 	{
 		//Triangle
 
-		triangleVertexArray.reset(EmberEngine::VertexArray::Create());
+		triangleVertexArray = EmberEngine::VertexArray::Create();
 
 		float vertices[3 * 6] =
 		{
@@ -32,7 +33,7 @@ public:
 			0.0f, 0.5f, 1.0f, 0.0f, 1.0f, 1.0f //Top Corner
 		};
 
-		triangleVertexBuffer.reset(EmberEngine::VertexBuffer::Create(vertices, sizeof(vertices)));
+		triangleVertexBuffer = EmberEngine::VertexBuffer::Create(vertices, sizeof(vertices));
 		EmberEngine::BufferLayout layout =
 		{
 			{ EmberEngine::ShaderDataType::Vec2, "i_Position" },
@@ -43,7 +44,7 @@ public:
 		triangleVertexArray->AddVertexBuffer(triangleVertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		triangleIndexBuffer.reset(EmberEngine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		triangleIndexBuffer = EmberEngine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		triangleVertexArray->SetIndexBuffer(triangleIndexBuffer);
 
 		std::string vertexSrcTriangle = R"(
@@ -69,7 +70,7 @@ public:
 			}
 		)";
 
-		triangleShader.reset(EmberEngine::Shader::Create(vertexSrcTriangle, fragmentSrcTriangle));
+		triangleShader = EmberEngine::Shader::Create(vertexSrcTriangle, fragmentSrcTriangle);
 
 
 
@@ -78,35 +79,37 @@ public:
 
 		//Square
 
-		squareVertexArray.reset(EmberEngine::VertexArray::Create());
+		squareVertexArray = EmberEngine::VertexArray::Create();
 
-		float SquareVertices[4 * 2] =
+		float SquareVertices[4 * 4] =
 		{
-			-0.75f, -0.75f, //Bottom-Left
-			0.75f, -0.75f, //Bottom-Right
-			0.75f, 0.75f, //Top-Right
-			-0.75f, 0.75f //Top-Left
+			-0.75f, -0.75f, 0.0f, 0.0f, //Bottom-Left
+			0.75f, -0.75f, 1.0f, 0.0f, //Bottom-Right
+			0.75f, 0.75f, 1.0f, 1.0f, //Top-Right
+			-0.75f, 0.75f, 0.0f, 1.0f //Top-Left
 		};
 
-		squareVertexBuffer.reset(EmberEngine::VertexBuffer::Create(SquareVertices, sizeof(SquareVertices)));
+		squareVertexBuffer = EmberEngine::VertexBuffer::Create(SquareVertices, sizeof(SquareVertices));
 
 		squareVertexBuffer->SetLayout({
-			{ EmberEngine::ShaderDataType::Vec2, "i_Position" }
+			{ EmberEngine::ShaderDataType::Vec2, "i_Position" },
+			{ EmberEngine::ShaderDataType::Vec2, "i_TexCoord"}
 			});
 		squareVertexArray->AddVertexBuffer(squareVertexBuffer);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		squareIndexBuffer.reset(EmberEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		squareIndexBuffer = EmberEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		squareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
 		std::string vertexSrcSquare = R"(
 			#version 330 core
 			layout(location = 0) in vec2 i_Position;
-			out vec2 v_Position;
+			layout(location = 1) in vec2 i_TexCoord;
+			out vec2 v_TexCoord;
 			uniform mat4 u_ViewProjection;
 			void main()
 			{
-				v_Position = i_Position;
+				v_TexCoord = i_TexCoord;
 				gl_Position = u_ViewProjection * vec4(i_Position, 0.0, 1.0);
 			}
 		)";
@@ -114,14 +117,20 @@ public:
 		std::string fragmentSrcSquare = R"(
 			#version 330 core
 			layout(location = 0) out vec4 Colour;
-			in vec2 v_Position;
+			in vec2 v_TexCoord;
+			uniform sampler2D u_Texture;
 			void main()
 			{
-				Colour = vec4(v_Position + 0.75, 0.0, 1.0);
+				Colour = texture(u_Texture, v_TexCoord);
 			}
 		)";
 
-		squareShader.reset(EmberEngine::Shader::Create(vertexSrcSquare, fragmentSrcSquare));
+		squareShader = EmberEngine::Shader::Create(vertexSrcSquare, fragmentSrcSquare);
+
+		squareTexture = EmberEngine::Texture::Create("Assets/Textures/TestCharacter.png");
+
+		squareShader->Bind();
+		squareShader->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate() override
@@ -149,6 +158,7 @@ public:
 
 		EmberEngine::Renderer::BeginScene(orthoCamera);
 
+		squareTexture->Bind();
 		EmberEngine::Renderer::DrawVertexArray(squareShader, squareVertexArray);
 
 		EmberEngine::Renderer::DrawVertexArray(triangleShader, triangleVertexArray);

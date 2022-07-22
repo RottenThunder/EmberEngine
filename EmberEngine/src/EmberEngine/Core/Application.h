@@ -1,8 +1,11 @@
 #pragma once
 #include "Base.h"
-#include "Window.h"
 #include "LayerStack.h"
+#include "ProcessorAnalyser.h"
+#include "Time.h"
+#include "Window.h"
 #include "EmberEngine/Events/ApplicationEvent.h"
+#include "EmberEngine/Renderer/Renderer.h"
 
 namespace EmberEngine
 {
@@ -21,6 +24,8 @@ namespace EmberEngine
 	public:
 		Application();
 		virtual ~Application();
+
+		void Init();
 
 		inline static Application& Get() { return *Instance; }
 

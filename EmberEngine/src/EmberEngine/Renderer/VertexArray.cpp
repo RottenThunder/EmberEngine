@@ -5,7 +5,7 @@
 
 namespace EmberEngine
 {
-	VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -13,7 +13,7 @@ namespace EmberEngine
 			EMBER_REVERSE_ASSERT(true, "RendererAPI::None is not currently supported!");
 			return nullptr;
 		case API::OpenGL:
-			return new OpenGLVertexArray();
+			return std::make_shared<OpenGLVertexArray>();
 		}
 
 		EMBER_REVERSE_ASSERT(true, "Unknown RendererAPI!");

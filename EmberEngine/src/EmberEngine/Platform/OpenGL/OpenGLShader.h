@@ -7,7 +7,11 @@ namespace EmberEngine
 	{
 	private:
 		uint32_t RendererID;
+		void Compile(const std::unordered_map<uint32_t, std::string>& shaderSources);
+		std::string ReadFile(const std::string& filePath);
+		std::unordered_map<uint32_t, std::string> PreProcess(const std::string& source);
 	public:
+		OpenGLShader(const std::string& filepath);
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 		virtual ~OpenGLShader();
 

@@ -23,6 +23,7 @@ namespace EmberEngine
 		virtual void UploadUniformVector4f(const std::string& name, const Vector4& vector) = 0;
 		virtual void UploadUniformMatrix4x4(const std::string& name, const Matrix4x4& matrix) = 0;
 
+		static Ref<Shader> Create(const std::string& filePath);
 		static Ref<Shader> Create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};
 }

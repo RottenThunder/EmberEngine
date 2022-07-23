@@ -101,31 +101,7 @@ public:
 		squareIndexBuffer = EmberEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		squareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
-		std::string vertexSrcSquare = R"(
-			#version 330 core
-			layout(location = 0) in vec2 i_Position;
-			layout(location = 1) in vec2 i_TexCoord;
-			out vec2 v_TexCoord;
-			uniform mat4 u_ViewProjection;
-			void main()
-			{
-				v_TexCoord = i_TexCoord;
-				gl_Position = u_ViewProjection * vec4(i_Position, 0.0, 1.0);
-			}
-		)";
-
-		std::string fragmentSrcSquare = R"(
-			#version 330 core
-			layout(location = 0) out vec4 Colour;
-			in vec2 v_TexCoord;
-			uniform sampler2D u_Texture;
-			void main()
-			{
-				Colour = texture(u_Texture, v_TexCoord);
-			}
-		)";
-
-		squareShader = EmberEngine::Shader::Create(vertexSrcSquare, fragmentSrcSquare);
+		squareShader = EmberEngine::Shader::Create("Assets/Shaders/Texture.eesl");
 
 		squareTexture = EmberEngine::Texture::Create("Assets/Textures/TestCharacter.png");
 

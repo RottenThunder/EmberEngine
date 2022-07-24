@@ -23,6 +23,7 @@ namespace EmberEngine
 		virtual void UploadUniformVector2f(const std::string& name, const Vector2& vector) override;
 		virtual void UploadUniformVector3f(const std::string& name, const Vector3& vector) override;
 		virtual void UploadUniformVector4f(const std::string& name, const Vector4& vector) override;
+		virtual void UploadUniformVector4f(const std::string& name, const Colour& colour) override;
 		virtual void UploadUniformMatrix4x4(const std::string& name, const Matrix4x4& matrix) override;
 	};
 }

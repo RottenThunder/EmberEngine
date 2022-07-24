@@ -26,8 +26,8 @@ project "EmberEngine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		"%{prj.name}/vendor/glad_/**.h",
-		"%{prj.name}/vendor/glad_/**.cpp",
+		"%{prj.name}/vendor/glad/**.h",
+		"%{prj.name}/vendor/glad/**.cpp",
 		"%{prj.name}/vendor/stb/**.h",
 		"%{prj.name}/vendor/stb/**.cpp"
 	}
@@ -36,7 +36,7 @@ project "EmberEngine"
 	{
 		"%{prj.name}/src",
 		"Dependencies/GLFW/include",
-		"%{prj.name}/vendor/glad_/include",
+		"%{prj.name}/vendor/glad/include",
 		"%{prj.name}/vendor/stb"
 	}
 

@@ -182,6 +182,12 @@ namespace EmberEngine
 		glUniform4f(location, vector.x, vector.y, vector.z, vector.w);
 	}
 
+	void OpenGLShader::UploadUniformVector4f(const std::string& name, const Colour& colour)
+	{
+		GLint location = glGetUniformLocation(RendererID, name.c_str());
+		glUniform4f(location, colour.Red, colour.Green, colour.Blue, colour.Alpha);
+	}
+
 	void OpenGLShader::UploadUniformMatrix4x4(const std::string& name, const Matrix4x4& matrix)
 	{
 		GLint location = glGetUniformLocation(RendererID, name.c_str());

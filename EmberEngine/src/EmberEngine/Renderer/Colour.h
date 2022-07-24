@@ -9,8 +9,7 @@ namespace EmberEngine
 		float Red, Green, Blue, Alpha;
 	public:
 		Colour();
+		Colour(float red, float green, float blue);
 		Colour(float red, float green, float blue, float alpha);
-
-		void SetToTransparent();
 	};
 }

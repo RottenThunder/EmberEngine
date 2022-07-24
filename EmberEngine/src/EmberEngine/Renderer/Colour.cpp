@@ -7,13 +7,13 @@ namespace EmberEngine
 	{
 	}
 
-	Colour::Colour(float red, float green, float blue, float alpha)
-		: Red(red), Green(green), Blue(blue), Alpha(alpha)
+	Colour::Colour(float red, float green, float blue)
+		: Red(red), Green(green), Blue(blue), Alpha(1.0f)
 	{
 	}
 
-	void Colour::SetToTransparent()
+	Colour::Colour(float red, float green, float blue, float alpha)
+		: Red(red), Green(green), Blue(blue), Alpha(alpha)
 	{
-		MathF::ResetVector4(&Red);
 	}
 }
